@@ -16,7 +16,7 @@ public class Proyecto {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("hola mundo");
-        System.out.println("Kendall le gusta diego");
+        System.out.println("Rebecca novia de Kendall");
     }
     
 }
