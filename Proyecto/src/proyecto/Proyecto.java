@@ -4,6 +4,8 @@
  */
 package proyecto;
 
+import logic.LogicEncriptator;
+
 /**
  *
  * @author brayrpgs
@@ -15,9 +17,7 @@ public class Proyecto {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("hola mundo 77");
-        System.out.println("Rebecca novia de Rosamelo lindo");
-        System.out.println("me quiero cumear en el pecho de maik");
+       
     }
-    
+
 }
