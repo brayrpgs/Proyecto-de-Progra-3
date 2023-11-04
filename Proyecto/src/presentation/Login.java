@@ -91,6 +91,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
         background.setMinimumSize(new java.awt.Dimension(800, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
