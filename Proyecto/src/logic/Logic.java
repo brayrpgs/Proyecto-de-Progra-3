@@ -4,10 +4,19 @@
  */
 package logic;
 
+import domain.Employee;
+
 /**
  *
  * @author brayrpgs
  */
 public class Logic {
+
+    public Logic() {
+    }
+    
+    public boolean isEmployee(Employee employee){
+        return // esperando a ceasarS
+    }
     
 }
