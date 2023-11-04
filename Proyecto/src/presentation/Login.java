@@ -4,10 +4,13 @@
  */
 package presentation;
 
+import domain.Employee;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import logic.Logic;
+import logic.LogicEncriptator;
 
 /**
  *
@@ -121,12 +124,34 @@ public class Login extends javax.swing.JFrame {
     public void showMessage(String message, String title, int messageType) {
         JOptionPane.showMessageDialog(null, message, title, messageType);
     }
+    
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        // TODO add your handling code here:
+       
         if ((tf_user.getText().isBlank() || tf_user.getText().isEmpty()) || this.psw_password.getPassword().length == 0) {
-            showMessage("Los datos estan incorrectos o incompletos", "Error al iniciar secion", JOptionPane.WARNING_MESSAGE);
+            showMessage("Los datos estan incorrectos o incompletos", "Error al iniciar sesion", JOptionPane.WARNING_MESSAGE);
+            
         } else {
+           
+           Employee employee = new Employee();
+           LogicEncriptator logicE = new LogicEncriptator();
+           Logic logic = new Logic();
+           
+           String password = logicE.encriptation(String.valueOf(psw_password.getText()));
+           
+           employee.setIdCard(tf_user.getText());
+           employee.setLastName(password);
+           
+           if(logic.isEmployee(employee)){
+               
+               //Levantar formulario principal
 
+               
+           } else {
+           
+               showMessage("Los datos estan incorrectos o incompletos", "Error al iniciar sesion", JOptionPane.WARNING_MESSAGE);
+               
+           }
+            
         }
 
 
