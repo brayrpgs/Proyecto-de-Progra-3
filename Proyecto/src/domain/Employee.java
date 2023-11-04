@@ -9,21 +9,26 @@ package domain;
  * @author brayrpgs
  */
 public class Employee {
+
     private String id;
     private String idCard;
     private String name;
     private String lastName;
     private String phone;
+    private String userName;
+    private String password;
 
     public Employee() {
     }
 
-    public Employee(String id, String idCard, String name, String lastName, String phone) {
+    public Employee(String id, String idCard, String name, String lastName, String phone, String userName, String password) {
         this.id = id;
         this.idCard = idCard;
         this.name = name;
         this.lastName = lastName;
         this.phone = phone;
+        this.userName = userName;
+        this.password = password;
     }
 
     public String getId() {
@@ -66,9 +71,29 @@ public class Employee {
         this.phone = phone;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
-        return "Employee{" + "id=" + id + ", idCard=" + idCard + ", name=" + name + ", lastName=" + lastName + ", phone=" + phone + '}';
+        return "Employee{" + "id=" + id + ", idCard=" + idCard + ", name=" + name + ", lastName=" + lastName + ", phone=" + phone + ", userName=" + userName + ", password=" + password + '}';
     }
+
     
+    
+    
+
 }
