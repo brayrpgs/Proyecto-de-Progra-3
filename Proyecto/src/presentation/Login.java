@@ -4,7 +4,6 @@
  */
 package presentation;
 
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author brayrpgs
  */
 public class Login extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form View
      */
@@ -32,15 +31,15 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblUserName = new javax.swing.JLabel();
-        lblPassword = new javax.swing.JLabel();
-        pswPassword = new javax.swing.JPasswordField();
-        txtUserName = new javax.swing.JTextField();
-        btnLogin = new javax.swing.JButton();
+        lbl_name = new javax.swing.JLabel();
+        lbl_pass = new javax.swing.JLabel();
+        psw_password = new javax.swing.JPasswordField();
+        tf_user = new javax.swing.JTextField();
+        btn_login = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Inicio de sesion");
+        setTitle("SISTEMA DE FACTURACION LIGIA");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(800, 520));
         setName("Login"); // NOI18N
@@ -51,33 +50,33 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        lblUserName.setBackground(java.awt.Color.white);
-        lblUserName.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        lblUserName.setForeground(java.awt.Color.white);
-        lblUserName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUserName.setText("Nombre de Usuario");
-        lblUserName.setToolTipText("nombre de usuario registrado en el sistema previamente");
+        lbl_name.setBackground(java.awt.Color.white);
+        lbl_name.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        lbl_name.setForeground(java.awt.Color.white);
+        lbl_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_name.setText("Nombre de Usuario");
+        lbl_name.setToolTipText("nombre de usuario registrado en el sistema previamente");
 
-        lblPassword.setBackground(java.awt.Color.white);
-        lblPassword.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        lblPassword.setForeground(java.awt.Color.white);
-        lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPassword.setText("Contraseña");
+        lbl_pass.setBackground(java.awt.Color.white);
+        lbl_pass.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        lbl_pass.setForeground(java.awt.Color.white);
+        lbl_pass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_pass.setText("Contraseña");
 
-        pswPassword.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        pswPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+        psw_password.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        psw_password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                pswPasswordKeyTyped(evt);
+                psw_passwordKeyTyped(evt);
             }
         });
 
-        txtUserName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUserName.setAutoscrolls(false);
+        tf_user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tf_user.setAutoscrolls(false);
 
-        btnLogin.setText("Iniciar sesion");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        btn_login.setText("Iniciar sesion");
+        btn_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                btn_loginActionPerformed(evt);
             }
         });
 
@@ -92,92 +91,79 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(306, 306, 306)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lblUserName)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pswPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(155, 155, 155))
+                    .addComponent(lbl_name)
+                    .addComponent(tf_user, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(psw_password, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(lblUserName)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(lblPassword)
-                        .addGap(18, 18, 18)
-                        .addComponent(pswPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnLogin))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(75, 75, 75)
+                .addComponent(lbl_name)
+                .addGap(18, 18, 18)
+                .addComponent(tf_user, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(lbl_pass)
+                .addGap(18, 18, 18)
+                .addComponent(psw_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btn_login)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    public void showMessage(String message, String title, int messageType){
+    public void showMessage(String message, String title, int messageType) {
         JOptionPane.showMessageDialog(null, message, title, messageType);
     }
-    
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
-        if((txtUserName.getText().isBlank() || txtUserName.getText().isEmpty()) || this.pswPassword.getPassword().length == 0){
-            
+        if ((tf_user.getText().isBlank() || tf_user.getText().isEmpty()) || this.psw_password.getPassword().length == 0) {
             showMessage("Los datos estan incorrectos o incompletos", "Error al iniciar secion", JOptionPane.WARNING_MESSAGE);
+        } else {
+
         }
-        else{
-          
-            
-        }
-    }//GEN-LAST:event_btnLoginActionPerformed
-    
-    public void resizeImage(JLabel label){
-        
-        //Obtengo la direccion de la imagen
-        ImageIcon URL = (ImageIcon) label.getIcon();
-        ImageIcon image =  new ImageIcon(URL.getDescription().replace("file:", ""));
-        
-        //Se redimensiona
-        image.setImage(image.getImage().getScaledInstance(getWidth(), getHeight(), 4));
-        
-        //Se coloca la imagen
-        label.setIcon(image);
-    }
-    
-    public void resizeImage(JButton label){
+
+
+    }//GEN-LAST:event_btn_loginActionPerformed
+    public void resizeImage(JLabel label) {
         // TODO add your handling code here:
         //optengo la direccion de la imagen
         ImageIcon URL = (ImageIcon) label.getIcon();
-        ImageIcon image =  new ImageIcon(URL.getDescription().replace("file:", ""));
+        ImageIcon image = new ImageIcon(URL.getDescription().replace("file:", ""));
         //la redimenciono
         image.setImage(image.getImage().getScaledInstance(getWidth(), getHeight(), 4));
         //coloco la imagen
         label.setIcon(image);
     }
-    
+
+    public void resizeImage(JButton label) {
+        // TODO add your handling code here:
+        //optengo la direccion de la imagen
+        ImageIcon URL = (ImageIcon) label.getIcon();
+        ImageIcon image = new ImageIcon(URL.getDescription().replace("file:", ""));
+        //la redimenciono
+        image.setImage(image.getImage().getScaledInstance(getWidth(), getHeight(), 4));
+        //coloco la imagen
+        label.setIcon(image);
+    }
+
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         // TODO add your handling code here:
         resizeImage(background);
     }//GEN-LAST:event_formComponentResized
 
-    private void pswPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswPasswordKeyTyped
+    private void psw_passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_psw_passwordKeyTyped
         // TODO add your handling code here:
-        if(evt.getKeyChar() == 10){
-            btnLogin.doClick();
+        if (evt.getKeyChar() == 10) {
+            btn_login.doClick();
         }
-    }//GEN-LAST:event_pswPasswordKeyTyped
+    }//GEN-LAST:event_psw_passwordKeyTyped
 
     /**
      * @param args the command line arguments
@@ -219,10 +205,10 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
-    private javax.swing.JButton btnLogin;
-    private javax.swing.JLabel lblPassword;
-    private javax.swing.JLabel lblUserName;
-    private javax.swing.JPasswordField pswPassword;
-    private javax.swing.JTextField txtUserName;
+    private javax.swing.JButton btn_login;
+    private javax.swing.JLabel lbl_name;
+    private javax.swing.JLabel lbl_pass;
+    private javax.swing.JPasswordField psw_password;
+    private javax.swing.JTextField tf_user;
     // End of variables declaration//GEN-END:variables
 }
