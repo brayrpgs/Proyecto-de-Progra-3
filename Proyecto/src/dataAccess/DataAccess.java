@@ -9,15 +9,14 @@ import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import domain.Employee;
-import java.sql.SQLException;
 
 
 /**
  *
- * @author brayrpgs
+ * @author Ceasar
  */
 public class DataAccess {
-    public Employee login(Employee employeeComeFromLogic){
+    public boolean login(Employee employeeComeFromLogic){
         try{
             
             Connection cn = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1/dbinventory", "root", "");
@@ -26,26 +25,19 @@ public class DataAccess {
             sentencia.setString(2, employeeComeFromLogic.getPassword());
             
             ResultSet rs = sentencia.executeQuery();
-            Employee e = new Employee();
             
             if (rs.next()) {//¿Hay datos para este user?
                 //Si si hay datos
-                e.setUserName(rs.getString("username"));
-                e.setPassword(rs.getString("password"));
-                sentencia.close();
-                rs.close();
-                return e;
+                return true;
             }else{
                 //No no hay datos
-                return null;
+                return false;
             }
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(e.toString());
-            return null;
+            return false;
         }
     }
-
-    
     
      
 }

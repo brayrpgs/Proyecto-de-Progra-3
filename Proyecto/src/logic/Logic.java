@@ -5,6 +5,7 @@
 package logic;
 
 import domain.Employee;
+import dataAccess.DataAccess;
 
 /**
  *
@@ -14,9 +15,10 @@ public class Logic {
 
     public Logic() {
     }
-    
-    public boolean isEmployee(Employee employee){
-        return false;// esperando a ceasarS
+
+    public boolean isEmployee(Employee employee) {
+        return new DataAccess().login(employee);
+
     }
-    
+
 }
