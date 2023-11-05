@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Ceasar
+ * @author brayrpgs
  */
 public class DataAccess {
     public Employee login(Employee employeeComeFromLogic){
@@ -31,6 +31,9 @@ public class DataAccess {
             if (rs.next()) {//¿Hay datos para este user?
                 //Si si hay datos
                 e.setUserName(rs.getString("username"));
+                e.setPassword(rs.getString("password"));
+                sentencia.close();
+                rs.close();
                 return e;
             }else{
                 //No no hay datos
