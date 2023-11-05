@@ -103,7 +103,7 @@ public class DataAccess {
         try {
 
             //Abro conexiones
-            PreparedStatement sentencia = preparedStateent("insert into tbemployee values (?,?,?,?,?,?)");
+            PreparedStatement sentencia = preparedStateent("insert into tbemployee values (?,?,?,?,?,?,?)");
             sentencia.setString(1, "0"); //ID
             sentencia.setString(2, employeeComeFromLogic.getIdCard());
             sentencia.setString(3, employeeComeFromLogic.getName());
@@ -133,6 +133,7 @@ public class DataAccess {
             //Abro conexiones
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee");
             ResultSet rs = sentencia.executeQuery();
+            
             while (rs.next()) {
 
                 if (rs.getString("idCard").equals(employeeComeFromLogic.getIdCard()) || rs.getString("username").equals(employeeComeFromLogic.getUserName())) {
@@ -140,16 +141,16 @@ public class DataAccess {
                     rs.close();
                     connectionSQL().close();
                     return false;
-                } else {
-                    createEmployee(employeeComeFromLogic);  
-                    return true;
-                }
+                    
+                } 
             }
 
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
-            return false;
+            
+            createEmployee(employeeComeFromLogic);  
+            return true;
 
         } catch (SQLException e) {
             System.out.println(e.toString());
