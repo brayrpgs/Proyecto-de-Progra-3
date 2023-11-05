@@ -64,11 +64,12 @@ public class DataAccess {
         }
     }
 
+    @SuppressWarnings("ConvertToTryWithResources")
     public List<Employee> consultarTodosLosRegistrosEnBaseDeDatos() {
         List<Employee> laListaDeRegistrosADevolver = new ArrayList<>();
         try {
            // "SELECT * FROM tbemployee";
-           PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee");
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee");
            ResultSet rs = sentencia.executeQuery();
 
             while (rs.next()) { //¿Existen registros?
@@ -85,14 +86,16 @@ public class DataAccess {
                 //Agrego el empleado a la Lista
                 laListaDeRegistrosADevolver.add(aEmployee);
             }
+            
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
+            return laListaDeRegistrosADevolver;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
             laListaDeRegistrosADevolver = null;
+            return laListaDeRegistrosADevolver;
         }
-        return laListaDeRegistrosADevolver;
     }
 
     public boolean createEmployee(Employee employeeComeFromLogic) {
@@ -100,7 +103,7 @@ public class DataAccess {
         try {
 
             //Abro conexiones
-            PreparedStatement sentencia = (PreparedStatement) connectionSQL().prepareStatement("insert into tbemployee values (?,?,?,?,?,?)");
+            PreparedStatement sentencia = preparedStateent("insert into tbemployee values (?,?,?,?,?,?)");
             sentencia.setString(1, "0"); //ID
             sentencia.setString(2, employeeComeFromLogic.getIdCard());
             sentencia.setString(3, employeeComeFromLogic.getName());
@@ -117,7 +120,7 @@ public class DataAccess {
 
             return true;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
         }
@@ -128,7 +131,7 @@ public class DataAccess {
         try {
 
             //Abro conexiones
-            PreparedStatement sentencia = (PreparedStatement) connectionSQL().prepareStatement("SELECT * FROM tbemployee");
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee");
             ResultSet rs = sentencia.executeQuery();
             while (rs.next()) {
 
@@ -148,7 +151,7 @@ public class DataAccess {
             connectionSQL().close();
             return false;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
         }
