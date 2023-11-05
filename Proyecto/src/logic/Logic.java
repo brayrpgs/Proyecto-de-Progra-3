@@ -18,7 +18,10 @@ public class Logic {
 
     public boolean isEmployee(Employee employee) {
         return new DataAccess().login(employee);
-
+    }
+    
+    public boolean isRepeat(Employee employee){
+        return new DataAccess().guardarEnBaseDeDatos(employee);
     }
 
 }
