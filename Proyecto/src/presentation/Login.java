@@ -143,7 +143,7 @@ public class Login extends javax.swing.JFrame {
                 
             } else {
 
-                showMessage("Los datos estan incorrectos o incompletos", "Error al iniciar sesion", JOptionPane.WARNING_MESSAGE);
+                showMessage("Los datos estan incorrectos o incompletos no encontre", "Error al iniciar sesion", JOptionPane.WARNING_MESSAGE);
 
             }
 
