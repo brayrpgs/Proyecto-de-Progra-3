@@ -63,13 +63,13 @@ public class DataAccess {
             return false;
         }
     }
-/*
+
     public List<Employee> consultarTodosLosRegistrosEnBaseDeDatos() {
         List<Employee> laListaDeRegistrosADevolver = new ArrayList<>();
         try {
            // "SELECT * FROM tbemployee";
-
-            ResultSet rs = conectionSQL("SELECT * FROM tbemployee");
+           PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee");
+           ResultSet rs = sentencia.executeQuery();
 
             while (rs.next()) { //¿Existen registros?
                 //Seteo un empleado
@@ -103,10 +103,11 @@ public class DataAccess {
             PreparedStatement sentencia = (PreparedStatement) connectionSQL().prepareStatement("insert into tbemployee values (?,?,?,?,?,?)");
             sentencia.setString(1, "0"); //ID
             sentencia.setString(2, employeeComeFromLogic.getIdCard());
-            sentencia.setString(3, usuarioQueReciboDeLogica.getApellidos());
-            sentencia.setString(4, usuarioQueReciboDeLogica.getUserName());
-            sentencia.setString(5, usuarioQueReciboDeLogica.getPassword());
-            sentencia.setString(6, usuarioQueReciboDeLogica.getPassword());
+            sentencia.setString(3, employeeComeFromLogic.getName());
+            sentencia.setString(4, employeeComeFromLogic.getLastName());
+            sentencia.setString(5, employeeComeFromLogic.getPhone());
+            sentencia.setString(6, employeeComeFromLogic.getUserName());
+            sentencia.setString(7, employeeComeFromLogic.getPassword());
 
             sentencia.execute(); //Ejecuta el SQL 
 
@@ -137,7 +138,7 @@ public class DataAccess {
                     connectionSQL().close();
                     return false;
                 } else {
-
+                    createEmployee(employeeComeFromLogic);  
                     return true;
                 }
             }
@@ -152,5 +153,5 @@ public class DataAccess {
             return false;
         }
     }
-*/
+
 }
