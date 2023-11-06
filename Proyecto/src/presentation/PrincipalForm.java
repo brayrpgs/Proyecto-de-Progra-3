@@ -15,6 +15,8 @@ public class PrincipalForm extends javax.swing.JFrame {
      */
     public PrincipalForm() {
         initComponents();
+        setVisible(true);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -26,13 +28,44 @@ public class PrincipalForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem20 = new javax.swing.JMenuItem();
         jDesktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jmEmployee = new javax.swing.JMenu();
+        mntmAddEmployee = new javax.swing.JMenuItem();
+        mntmReadEmployee = new javax.swing.JMenuItem();
+        mntmUpdateEmployee = new javax.swing.JMenuItem();
+        mntmDeleteEmployee = new javax.swing.JMenuItem();
+        jmCustomer = new javax.swing.JMenu();
+        mntmAddCustomer = new javax.swing.JMenuItem();
+        mntmReadCustomer = new javax.swing.JMenuItem();
+        mntmUpdateCustomer = new javax.swing.JMenuItem();
+        mntmDeleteCustomer = new javax.swing.JMenuItem();
+        jmArticles = new javax.swing.JMenu();
+        mntmAddArticle = new javax.swing.JMenuItem();
+        mntmReadArticle = new javax.swing.JMenuItem();
+        mntmUpdateArticle = new javax.swing.JMenuItem();
+        mntmDeleteArticle = new javax.swing.JMenuItem();
+        jmSales = new javax.swing.JMenu();
+        mntmAddSale = new javax.swing.JMenuItem();
+        mntmReadSale = new javax.swing.JMenuItem();
+        mntmUpdateSale = new javax.swing.JMenuItem();
+        mntmDeleteSale = new javax.swing.JMenuItem();
+        jmSalesReport = new javax.swing.JMenu();
+        mntmSale = new javax.swing.JMenu();
+        mntmEmployeeReport = new javax.swing.JMenuItem();
+        mntmCustomerReport = new javax.swing.JMenuItem();
+        mntmTotalSales = new javax.swing.JMenuItem();
+        mntmInventoryAvailable = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem20.setText("jMenuItem20");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de inventarios");
+        setResizable(false);
 
         javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
         jDesktopPane.setLayout(jDesktopPaneLayout);
@@ -45,11 +78,134 @@ public class PrincipalForm extends javax.swing.JFrame {
             .addGap(0, 700, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jmEmployee.setText("Vendedores");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        mntmAddEmployee.setText("Agregar vendedores");
+        mntmAddEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmAddEmployeeActionPerformed(evt);
+            }
+        });
+        jmEmployee.add(mntmAddEmployee);
+
+        mntmReadEmployee.setText("Consultar vendedores");
+        mntmReadEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmReadEmployeeActionPerformed(evt);
+            }
+        });
+        jmEmployee.add(mntmReadEmployee);
+
+        mntmUpdateEmployee.setText("Modificar vendedores");
+        mntmUpdateEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmUpdateEmployeeActionPerformed(evt);
+            }
+        });
+        jmEmployee.add(mntmUpdateEmployee);
+
+        mntmDeleteEmployee.setText("Eliminar vendedores");
+        mntmDeleteEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmDeleteEmployeeActionPerformed(evt);
+            }
+        });
+        jmEmployee.add(mntmDeleteEmployee);
+
+        jMenuBar1.add(jmEmployee);
+
+        jmCustomer.setText("Clientes");
+
+        mntmAddCustomer.setText("Agregrar clientes");
+        mntmAddCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmAddCustomerActionPerformed(evt);
+            }
+        });
+        jmCustomer.add(mntmAddCustomer);
+
+        mntmReadCustomer.setText("Consultar clientes");
+        jmCustomer.add(mntmReadCustomer);
+
+        mntmUpdateCustomer.setText("Modificar clientes");
+        mntmUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmUpdateCustomerActionPerformed(evt);
+            }
+        });
+        jmCustomer.add(mntmUpdateCustomer);
+
+        mntmDeleteCustomer.setText("Eliminar clientes");
+        jmCustomer.add(mntmDeleteCustomer);
+
+        jMenuBar1.add(jmCustomer);
+
+        jmArticles.setText("Articulos");
+
+        mntmAddArticle.setText("Agregrar articulos");
+        jmArticles.add(mntmAddArticle);
+
+        mntmReadArticle.setText("Consultar articulos");
+        jmArticles.add(mntmReadArticle);
+
+        mntmUpdateArticle.setText("Modificar articulos");
+        jmArticles.add(mntmUpdateArticle);
+
+        mntmDeleteArticle.setText("Eliminar articulos");
+        jmArticles.add(mntmDeleteArticle);
+
+        jMenuBar1.add(jmArticles);
+
+        jmSales.setText("Ventas");
+
+        mntmAddSale.setText("Agregar ventas");
+        mntmAddSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmAddSaleActionPerformed(evt);
+            }
+        });
+        jmSales.add(mntmAddSale);
+
+        mntmReadSale.setText("Consultar ventas");
+        jmSales.add(mntmReadSale);
+
+        mntmUpdateSale.setText("Modificar ventas");
+        mntmUpdateSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmUpdateSaleActionPerformed(evt);
+            }
+        });
+        jmSales.add(mntmUpdateSale);
+
+        mntmDeleteSale.setText("Eliminar ventas");
+        mntmDeleteSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmDeleteSaleActionPerformed(evt);
+            }
+        });
+        jmSales.add(mntmDeleteSale);
+
+        jMenuBar1.add(jmSales);
+
+        jmSalesReport.setText("Reportes");
+
+        mntmSale.setText("Ventas");
+
+        mntmEmployeeReport.setText("Reporte por vendedor");
+        mntmSale.add(mntmEmployeeReport);
+
+        mntmCustomerReport.setText("Reporte por cliente");
+        mntmSale.add(mntmCustomerReport);
+
+        mntmTotalSales.setText("Ventas totales");
+        mntmSale.add(mntmTotalSales);
+
+        jmSalesReport.add(mntmSale);
+
+        mntmInventoryAvailable.setText("Inventario disponible");
+        jmSalesReport.add(mntmInventoryAvailable);
+
+        jMenuBar1.add(jmSalesReport);
 
         setJMenuBar(jMenuBar1);
 
@@ -57,59 +213,170 @@ public class PrincipalForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrincipalForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void mntmAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmAddEmployeeActionPerformed
+        // TODO add your handling code here:
+        
+        CRUDInternalForm c = new CRUDInternalForm();
+        jDesktopPane.add(c);
+        c.setTitle("Agregar vendedores");
+        
+        //Agregando labels
+        c.jLabel1.setText("Cedula");
+        c.jLabel2.setText("Nombre");
+        c.jLabel3.setText("Apellidos");
+        c.jLabel4.setText("Telefono");
+        c.jLabel5.setText("Usuario");
+        c.jLabel6.setText("Contraseña");
+        
+        //Agregando los botones
+        c.btn1.setText("Agregar vendedor");       
+        c.btn2.setVisible(false);
+        
+        //Apagando la tabla
+        c.jTable1.setVisible(false);
+        c.jScrollPane1.setVisible(false);
+        
+        //Ajustando la ventana
+        c.setSize(891, 350);
+        
+        c.show();
+    }//GEN-LAST:event_mntmAddEmployeeActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PrincipalForm().setVisible(true);
-            }
-        });
-    }
+    private void mntmAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmAddCustomerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mntmAddCustomerActionPerformed
+
+    private void mntmUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmUpdateCustomerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mntmUpdateCustomerActionPerformed
+
+    private void mntmUpdateSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmUpdateSaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mntmUpdateSaleActionPerformed
+
+    private void mntmDeleteSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmDeleteSaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mntmDeleteSaleActionPerformed
+
+    private void mntmAddSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmAddSaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mntmAddSaleActionPerformed
+
+    private void mntmReadEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmReadEmployeeActionPerformed
+        // TODO add your handling code here:
+        
+        CRUDInternalForm c = new CRUDInternalForm();
+        jDesktopPane.add(c);
+        c.setTitle("Mostrar vendedores");
+        
+        //Agregando labels
+        c.jLabel1.setText("Cedula");
+        c.jLabel2.setText("Nombre");
+        c.jLabel3.setText("Apellidos");
+        c.jLabel4.setText("Telefono");
+        c.jLabel5.setText("Usuario");
+        c.jLabel6.setText("Contraseña");
+        
+        c.jLabel6.setEnabled(false);
+        c.txt6.setEnabled(false);
+        
+        //Agregando los botones
+        c.btn2.setText("Filtrar");       
+        c.btn1.setVisible(false);
+           
+        //Falta cargar datos en la tabla
+        
+        c.show();
+        
+    }//GEN-LAST:event_mntmReadEmployeeActionPerformed
+
+    private void mntmUpdateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmUpdateEmployeeActionPerformed
+        // TODO add your handling code here:
+        CRUDInternalForm c = new CRUDInternalForm();
+        jDesktopPane.add(c);
+        c.setTitle("Modificar vendedores");
+        
+        //Agregando labels
+        c.jLabel1.setText("Cedula");
+        c.jLabel2.setText("Nombre");
+        c.jLabel3.setText("Apellidos");
+        c.jLabel4.setText("Telefono");
+        c.jLabel5.setText("Usuario");
+        c.jLabel6.setText("Contraseña");
+        
+        //Agregando los botones
+        c.btn1.setText("Filtrar");       
+        c.btn2.setText("Modificar");
+           
+        //Falta cargar datos en la tabla
+        
+        c.show();
+    }//GEN-LAST:event_mntmUpdateEmployeeActionPerformed
+
+    private void mntmDeleteEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmDeleteEmployeeActionPerformed
+        // TODO add your handling code here:
+        CRUDInternalForm c = new CRUDInternalForm();
+        jDesktopPane.add(c);
+        c.setTitle("Eliminar vendedores");
+        
+        //Agregando labels
+        c.jLabel1.setText("Cedula");
+        c.jLabel2.setText("Nombre");
+        c.jLabel3.setText("Apellidos");
+        c.jLabel4.setText("Telefono");
+        c.jLabel5.setText("Usuario");
+        c.jLabel6.setText("Contraseña");
+        
+        //Agregando los botones
+        c.btn1.setText("Filtrar");       
+        c.btn2.setText("Eliminar");
+           
+        //Falta cargar datos en la tabla
+        
+        c.show();
+    }//GEN-LAST:event_mntmDeleteEmployeeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem20;
+    private javax.swing.JMenu jmArticles;
+    private javax.swing.JMenu jmCustomer;
+    private javax.swing.JMenu jmEmployee;
+    private javax.swing.JMenu jmSales;
+    private javax.swing.JMenu jmSalesReport;
+    private javax.swing.JMenuItem mntmAddArticle;
+    private javax.swing.JMenuItem mntmAddCustomer;
+    private javax.swing.JMenuItem mntmAddEmployee;
+    private javax.swing.JMenuItem mntmAddSale;
+    private javax.swing.JMenuItem mntmCustomerReport;
+    private javax.swing.JMenuItem mntmDeleteArticle;
+    private javax.swing.JMenuItem mntmDeleteCustomer;
+    private javax.swing.JMenuItem mntmDeleteEmployee;
+    private javax.swing.JMenuItem mntmDeleteSale;
+    private javax.swing.JMenuItem mntmEmployeeReport;
+    private javax.swing.JMenuItem mntmInventoryAvailable;
+    private javax.swing.JMenuItem mntmReadArticle;
+    private javax.swing.JMenuItem mntmReadCustomer;
+    private javax.swing.JMenuItem mntmReadEmployee;
+    private javax.swing.JMenuItem mntmReadSale;
+    private javax.swing.JMenu mntmSale;
+    private javax.swing.JMenuItem mntmTotalSales;
+    private javax.swing.JMenuItem mntmUpdateArticle;
+    private javax.swing.JMenuItem mntmUpdateCustomer;
+    private javax.swing.JMenuItem mntmUpdateEmployee;
+    private javax.swing.JMenuItem mntmUpdateSale;
     // End of variables declaration//GEN-END:variables
 }
