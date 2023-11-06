@@ -41,4 +41,9 @@ public class Logic {
         return dataResult;
     }
 
+    public String[] tagName() {
+        String[] tag = {"Id", "Cedula", "Nombre", "Apellidos", "Telefono", "Usuario", "Contraseña"};
+        return tag;
+    }
+
 }
