@@ -4,6 +4,9 @@
  */
 package presentation;
 
+import javax.swing.table.DefaultTableModel;
+import logic.Logic;
+
 /**
  *
  * @author kenda
@@ -17,6 +20,7 @@ public class PrincipalForm extends javax.swing.JFrame {
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -294,7 +298,9 @@ public class PrincipalForm extends javax.swing.JFrame {
         c.btn2.setText("Filtrar");       
         c.btn1.setVisible(false);
            
-        //Falta cargar datos en la tabla
+        //Datos en la tabla
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allData(), new Logic().tagName()));
+        
         
         c.show();
         
@@ -308,7 +314,7 @@ public class PrincipalForm extends javax.swing.JFrame {
         
         //Agregando labels
         c.jLabel1.setText("Cedula");
-        c.jLabel2.setText("Nombre");
+        c.jLabel2.setText("Nomedubre");
         c.jLabel3.setText("Apellidos");
         c.jLabel4.setText("Telefono");
         c.jLabel5.setText("Usuario");
@@ -318,7 +324,9 @@ public class PrincipalForm extends javax.swing.JFrame {
         c.btn1.setText("Filtrar");       
         c.btn2.setText("Modificar");
            
-        //Falta cargar datos en la tabla
+        //Datos en la tabla
+        
+        
         
         c.show();
     }//GEN-LAST:event_mntmUpdateEmployeeActionPerformed
@@ -345,7 +353,6 @@ public class PrincipalForm extends javax.swing.JFrame {
         
         c.show();
     }//GEN-LAST:event_mntmDeleteEmployeeActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane;
