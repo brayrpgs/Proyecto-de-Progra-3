@@ -37,6 +37,7 @@ public class Logic {
             dataResult[i][4] = data.getPhone();
             dataResult[i][5] = data.getUserName();
             dataResult[i][6] = data.getPassword();
+            i++;
         }
         return dataResult;
     }
