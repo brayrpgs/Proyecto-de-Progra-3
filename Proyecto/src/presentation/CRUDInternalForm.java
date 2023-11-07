@@ -242,37 +242,49 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             String phone = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4));
             String username = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 5));
             String password = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 6));
-              
-            employee.setId(id);
-            employee.setIdCard(idCard);
-            employee.setName(name);
-            employee.setLastName(lastName);
-            employee.setPhone(phone);
-            employee.setUserName(username);
-            employee.setPassword(password);
-            
+                          
             txt1.setText(idCard);
             txt2.setText(name);
             txt3.setText(lastName);
             txt4.setText(phone);
             txt5.setText(username);
             txt6.setText(password);
+            
+            employee.setId(id);
+            
+            
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
         // TODO add your handling code here:
         if(btn2.getText().equals("Modificar")){
-                        
+                
+            
             if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText())){
             
                 showMessage("Datos incorrectos", "Error al actualizar el vendedor", JOptionPane.ERROR_MESSAGE);
                 return;
             } 
+            employee.setIdCard(txt1.getText());
+            employee.setName(txt2.getText());
+            employee.setLastName(txt3.getText());
+            employee.setPhone(txt4.getText());
+            employee.setUserName(txt5.getText());
+            employee.setPassword(txt6.getText());
             
-            new Logic().update(employee);
-            employee = null;
-            
+                System.out.println(employee.toString());
+                
+            if(new Logic().update(employee)){
+                
+                employee = null;
+                showMessage("Vendedor actualizado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+                
+            } else {
+                
+                showMessage("Datos incorrectos", "Error al actualizar el vendedor", JOptionPane.ERROR_MESSAGE);
+                
+            }
         }
     }//GEN-LAST:event_btn2ActionPerformed
 
