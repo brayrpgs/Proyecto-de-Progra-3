@@ -25,11 +25,11 @@ public class Logic {
         return new DataAccess().guardarEnBaseDeDatos(employee);
     }
 
-    public Object[][] allData(Employee employee) {
+    public Object[][] allData() {
         List<Employee> list = new DataAccess().consultarTodosLosRegistrosEnBaseDeDatos();
         Object[][] dataResult = new Object[list.size()][7];
+        int i = 0;
         for (Employee data : list) {
-            int i = 0;
             dataResult[i][0] = data.getId();
             dataResult[i][1] = data.getIdCard();
             dataResult[i][2] = data.getName();
