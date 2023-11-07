@@ -4,6 +4,7 @@
  */
 package presentation;
 
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import logic.Logic;
 
@@ -283,24 +284,30 @@ public class PrincipalForm extends javax.swing.JFrame {
         jDesktopPane.add(c);
         c.setTitle("Mostrar vendedores");
         
-        //Agregando labels
-        c.jLabel1.setText("Cedula");
-        c.jLabel2.setText("Nombre");
-        c.jLabel3.setText("Apellidos");
-        c.jLabel4.setText("Telefono");
-        c.jLabel5.setText("Usuario");
-        c.jLabel6.setText("Contraseña");
+        //Apagando labels
+        c.jLabel1.setVisible(false);
+        c.jLabel2.setVisible(false);
+        c.jLabel3.setVisible(false);
+        c.jLabel4.setVisible(false);
+        c.jLabel5.setVisible(false);
+        c.jLabel6.setVisible(false);
         
-        c.jLabel6.setEnabled(false);
-        c.txt6.setEnabled(false);
-        
-        //Agregando los botones
-        c.btn2.setText("Filtrar");       
+        //Apagando txt
+        c.txt1.setVisible(false);
+        c.txt2.setVisible(false);
+        c.txt3.setVisible(false);
+        c.txt4.setVisible(false);
+        c.txt5.setVisible(false);
+        c.txt6.setVisible(false);
+                
+        //Apagando los botones
+        c.btn2.setVisible(false);       
         c.btn1.setVisible(false);
-           
+                 
         //Datos en la tabla
         c.jTable1.setModel(new DefaultTableModel(new Logic().allData(), new Logic().tagName()));
-        
+        c.jTable1.removeColumn(c.jTable1.getColumn("Id"));
+        c.jTable1.removeColumn(c.jTable1.getColumn("Contraseña"));
         
         c.show();
         
