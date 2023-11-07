@@ -68,7 +68,6 @@ public class DataAccess {
     public List<Employee> consultarTodosLosRegistrosEnBaseDeDatos() {
         List<Employee> laListaDeRegistrosADevolver = new ArrayList<>();
         try {
-           // "SELECT * FROM tbemployee";
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee");
            ResultSet rs = sentencia.executeQuery();
 
@@ -154,6 +153,29 @@ public class DataAccess {
 
         } catch (SQLException e) {
             System.out.println(e.toString());
+            return false;
+        }
+    }
+    
+     public boolean updateEmployee(Employee employeeComeFromLogic){
+     
+        try {
+            PreparedStatement sentencia=preparedStateent("UPDATE tbemployee SET idCard='?',name='?',lastName='?',phone='?',username='?',password='?' WHERE id = '?'");
+            
+            sentencia.setString(1, employeeComeFromLogic.getIdCard());
+            sentencia.setString(2, employeeComeFromLogic.getName());
+            sentencia.setString(3, employeeComeFromLogic.getLastName());
+            sentencia.setString(4, employeeComeFromLogic.getPhone());
+            sentencia.setString(5, employeeComeFromLogic.getUserName());
+            sentencia.setString(6, employeeComeFromLogic.getPassword());
+            sentencia.setString(7, employeeComeFromLogic.getId()); //ID
+            
+            sentencia.executeQuery();
+            sentencia.close();
+            connectionSQL().close();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
             return false;
         }
     }
