@@ -46,5 +46,9 @@ public class Logic {
         String[] tag = {"Id", "Cedula", "Nombre", "Apellidos", "Telefono", "Usuario", "Contraseña"};
         return tag;
     }
+    
+    public boolean update(Employee employee){
+        return new DataAccess().updateEmployee(employee);
+    }
 
 }
