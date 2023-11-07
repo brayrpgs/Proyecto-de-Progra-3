@@ -6,6 +6,8 @@ package presentation;
 
 import domain.Employee;
 import javax.swing.JOptionPane;
+import logic.Logic;
+import logic.LogicEncriptator;
 
 /**
  *
@@ -19,7 +21,7 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
     public CRUDInternalForm() {
         initComponents();
         setVisible(true);    }
-
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,6 +99,12 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -104,6 +112,12 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("DATA");
+
+        btn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn2ActionPerformed(evt);
+            }
+        });
 
         btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,13 +186,14 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel4))))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
@@ -214,6 +229,53 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btn1ActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        if(btn2.getText().equals("Modificar")){
+            
+            employee = new Employee();
+            
+            String id = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
+            String idCard = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1));
+            String name = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2));
+            String lastName = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3));
+            String phone = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4));
+            String username = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 5));
+            String password = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 6));
+              
+            employee.setId(id);
+            employee.setIdCard(idCard);
+            employee.setName(name);
+            employee.setLastName(lastName);
+            employee.setPhone(phone);
+            employee.setUserName(username);
+            employee.setPassword(password);
+            
+            txt1.setText(idCard);
+            txt2.setText(name);
+            txt3.setText(lastName);
+            txt4.setText(phone);
+            txt5.setText(username);
+            txt6.setText(password);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
+        // TODO add your handling code here:
+        if(btn2.getText().equals("Modificar")){
+                        
+            if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText())){
+            
+                showMessage("Datos incorrectos", "Error al actualizar el vendedor", JOptionPane.ERROR_MESSAGE);
+                return;
+            } 
+            
+            new Logic().update(employee);
+            employee = null;
+            
+        }
+    }//GEN-LAST:event_btn2ActionPerformed
+
     //Agregar vendedor
     public void createEmployee(){
     
@@ -226,14 +288,20 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             employee.setLastName(txt3.getText());
             employee.setPhone(txt4.getText());
             employee.setUserName(txt5.getText());
-            employee.setPassword(txt6.getText());
+            employee.setPassword(new LogicEncriptator().encriptation(txt6.getText()));
+            
+            if(!new Logic().isRepeat(employee)){
+            
+                 showMessage("Datos incorrectos", "Error al guardar vendedor", JOptionPane.ERROR_MESSAGE);
+            
+            } else {
+        
+                 showMessage("Vendedor agregado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+            
+            }
             
         } else {
             showMessage("Datos incorrectos", "Error al guardar vendedor", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        if(true){
-            //Parte de logica PARA MANDAR A BD
         }
     }
     
@@ -247,6 +315,7 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, message, title, messageType);
     }
 
+    private Employee employee;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn1;
     public javax.swing.JButton btn2;
