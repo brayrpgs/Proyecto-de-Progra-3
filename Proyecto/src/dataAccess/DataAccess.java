@@ -179,7 +179,7 @@ public class DataAccess {
             return false;
         }
     }
-     public boolean eliminarDatos(Employee employee){
+     public boolean deleteEmployee(Employee employee){
         
         try{
             //Abro conexiones

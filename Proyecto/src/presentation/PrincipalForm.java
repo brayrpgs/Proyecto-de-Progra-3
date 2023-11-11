@@ -253,7 +253,6 @@ public class PrincipalForm extends javax.swing.JFrame {
         
         //Ajustando la ventana
         c.setSize(891, 350);
-        
         c.show();
     }//GEN-LAST:event_mntmAddEmployeeActionPerformed
 
