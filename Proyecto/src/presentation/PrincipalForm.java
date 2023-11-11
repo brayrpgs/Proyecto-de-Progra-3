@@ -357,7 +357,9 @@ public class PrincipalForm extends javax.swing.JFrame {
         c.btn2.setText("Eliminar");
            
         //Falta cargar datos en la tabla
-        
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allData(), new Logic().tagName()));
+        c.jTable1.removeColumn(c.jTable1.getColumn("Id"));
+        c.jTable1.removeColumn(c.jTable1.getColumn("Contraseña"));
         
         c.show();
     }                                                  
