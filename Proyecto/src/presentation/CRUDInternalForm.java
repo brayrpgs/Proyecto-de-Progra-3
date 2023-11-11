@@ -6,6 +6,7 @@ package presentation;
 
 import domain.Employee;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import logic.Logic;
 import logic.LogicEncriptator;
 
@@ -266,25 +267,43 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
                 showMessage("Datos incorrectos", "Error al actualizar el vendedor", JOptionPane.ERROR_MESSAGE);
                 return;
             } 
+            
             employee.setIdCard(txt1.getText());
             employee.setName(txt2.getText());
             employee.setLastName(txt3.getText());
             employee.setPhone(txt4.getText());
             employee.setUserName(txt5.getText());
-            employee.setPassword(txt6.getText());
             
-                System.out.println(employee.toString());
+            if(txt6.getText().equals(String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 6)))){
+                
+                employee.setPassword(txt6.getText());
+                
+                
+            } else {
+            
+                employee.setPassword(new LogicEncriptator().encriptation(txt6.getText()));
+                
+            }
+            
+            
                 
             if(new Logic().update(employee)){
                 
                 employee = null;
                 showMessage("Vendedor actualizado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
                 
+                refreshTable();
+                jTable1.removeColumn(jTable1.getColumn("Id"));
+                jTable1.removeColumn(jTable1.getColumn("Contraseña"));
+                cleanData();
+                
             } else {
                 
                 showMessage("Datos incorrectos", "Error al actualizar el vendedor", JOptionPane.ERROR_MESSAGE);
                 
             }
+            
+            
         }
     }//GEN-LAST:event_btn2ActionPerformed
 
@@ -309,7 +328,7 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             } else {
         
                  showMessage("Vendedor agregado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
-            
+                 cleanData();
             }
             
         } else {
@@ -325,6 +344,25 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
     //Metodo para imprimir
     public void showMessage(String message, String title, int messageType) {
         JOptionPane.showMessageDialog(null, message, title, messageType);
+    }
+    
+    //Metodo para actualizar tabla
+    public void refreshTable(){
+    
+        jTable1.setModel(new DefaultTableModel(new Logic().allData(), new Logic().tagName()));
+        
+    }
+    
+    //Metodo para limpiar datos
+    public void cleanData(){
+    
+        txt1.setText(null);
+        txt2.setText(null);
+        txt3.setText(null);
+        txt4.setText(null);
+        txt5.setText(null);
+        txt6.setText(null);
+
     }
 
     private Employee employee;
