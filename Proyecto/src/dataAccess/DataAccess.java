@@ -179,5 +179,27 @@ public class DataAccess {
             return false;
         }
     }
+     public boolean eliminarDatos(Employee employee){
+        
+        try{
+            //Abro conexiones
+           
+            // selecr
+            PreparedStatement sentencia=preparedStateent("DELETE FROM tbemployee WHERE username = ?");
+            sentencia.setString(1, employee.getUserName());
+            
+            sentencia.execute(); //Ejecuta el SQL 
+            
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+            
+            return true;
+            
+        }catch (Exception e){
+            System.out.println(e.toString());
+            return false;
+        }
+    }
 
 }

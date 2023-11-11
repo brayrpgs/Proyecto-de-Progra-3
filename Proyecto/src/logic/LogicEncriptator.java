@@ -16,5 +16,5 @@ public class LogicEncriptator {
     public String encriptation(String password){
         return DigestUtils.md5Hex(password);
     }
-    
+   
 }

@@ -129,14 +129,16 @@ public class Login extends javax.swing.JFrame {
 
         if ((tf_user.getText().isBlank() || tf_user.getText().isEmpty()) || this.psw_password.getPassword().length == 0) {
             showMessage("Los datos estan incorrectos o incompletos", "Error al iniciar sesion", JOptionPane.WARNING_MESSAGE);
+           
 
+          
         } else {
 
             Employee employee = new Employee();
 
             employee.setUserName(tf_user.getText());
             employee.setPassword(new LogicEncriptator().encriptation(String.valueOf(psw_password.getPassword())));
-
+            
             if (new Logic().isEmployee(employee)) {
 
                 
@@ -144,7 +146,9 @@ public class Login extends javax.swing.JFrame {
             } else {
 
                 showMessage("Los datos estan incorrectos o incompletos no encontre", "Error al iniciar sesion", JOptionPane.WARNING_MESSAGE);
+               
 
+   
             }
 
         }
