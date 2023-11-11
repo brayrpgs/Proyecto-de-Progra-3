@@ -50,5 +50,9 @@ public class Logic {
     public boolean update(Employee employee){
         return new DataAccess().updateEmployee(employee);
     }
+    
+    public boolean deleteEmployee(Employee employee){
+        return new dataAccess.DataAccess().deleteEmployee(employee);
+    }
 
 }
