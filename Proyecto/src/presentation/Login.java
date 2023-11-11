@@ -140,8 +140,7 @@ public class Login extends javax.swing.JFrame {
             employee.setPassword(new LogicEncriptator().encriptation(String.valueOf(psw_password.getPassword())));
             
             if (new Logic().isEmployee(employee)) {
-
-                
+                new PrincipalForm();
                 
             } else {
 
