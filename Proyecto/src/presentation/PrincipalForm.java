@@ -353,7 +353,16 @@ public class PrincipalForm extends javax.swing.JFrame {
         c.jLabel5.setText("Usuario");
         c.jLabel6.setText("Contraseña");
         
+        c.txt1.setEditable(false);
+        c.txt2.setEditable(false);
+        c.txt3.setEditable(false);
+        c.txt4.setEditable(false);
+        c.txt5.setEditable(false);
+        c.txt6.setEditable(false);
+              
+        
         //Agregando los botones      
+        c.btn1.setVisible(false);
         c.btn2.setText("Eliminar");
            
         //Falta cargar datos en la tabla

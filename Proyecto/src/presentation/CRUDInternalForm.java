@@ -254,6 +254,27 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             employee.setId(id);
             
             
+        } else if(btn2.getText().equals("Eliminar")){
+        
+            employee = new Employee();
+            
+            String id = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
+            String idCard = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1));
+            String name = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2));
+            String lastName = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3));
+            String phone = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4));
+            String username = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 5));
+            String password = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 6));
+                          
+            txt1.setText(idCard);
+            txt2.setText(name);
+            txt3.setText(lastName);
+            txt4.setText(phone);
+            txt5.setText(username);
+            txt6.setText(password);
+            
+            employee.setId(id);
+        
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -304,6 +325,32 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             }
             
             
+        } else if(btn2.getText().equals("Eliminar")){
+        
+            if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText())){
+            
+                showMessage("Datos incorrectos", "Error al eliminar el vendedor", JOptionPane.ERROR_MESSAGE);
+                return;
+            } 
+            
+            employee.setUserName(txt5.getText());
+                
+            if(new Logic().deleteEmployee(employee)){
+                
+                employee = null;
+                showMessage("Vendedor eliminado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+                
+                refreshTable();
+                jTable1.removeColumn(jTable1.getColumn("Id"));
+                jTable1.removeColumn(jTable1.getColumn("Contraseña"));
+                cleanData();
+                
+            } else {
+                
+                showMessage("Datos incorrectos", "Error al actualizar el vendedor", JOptionPane.ERROR_MESSAGE);
+                
+            }
+        
         }
     }//GEN-LAST:event_btn2ActionPerformed
 
