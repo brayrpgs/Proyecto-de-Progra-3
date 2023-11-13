@@ -82,6 +82,11 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
                 txt4ActionPerformed(evt);
             }
         });
+        txt4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt4KeyTyped(evt);
+            }
+        });
 
         txt1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -353,6 +358,17 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
         
         }
     }//GEN-LAST:event_btn2ActionPerformed
+
+    private void txt4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt4KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if((c < '0' || c > '9') && c != evt.VK_BACK_SPACE) {
+         
+            evt.consume();
+						
+        }
+    }//GEN-LAST:event_txt4KeyTyped
 
     //Agregar vendedor
     public void createEmployee(){
