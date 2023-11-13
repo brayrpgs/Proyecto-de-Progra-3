@@ -6,14 +6,14 @@ package dataAccess;
 
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Connection;
+import domain.Customer;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import domain.Employee;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -202,5 +202,138 @@ public class DataAccess {
             return false;
         }
     }
+     
+     public List<Customer> consultarTodosLosRegistrosEnBaseDeDatosCustomer() {
+        List<Customer> laListaDeRegistrosADevolver = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbcustomer");
+           ResultSet rs = sentencia.executeQuery();
 
+            while (rs.next()) { //¿Existen registros?
+                //Seteo un empleado
+                Customer aCustomer = new Customer();
+                aCustomer.setId(rs.getString("id"));
+                aCustomer.setIdCard(rs.getString("idCard"));
+                aCustomer.setName(rs.getString("name"));
+                aCustomer.setLastName(rs.getString("lastName"));
+                aCustomer.setPhone(rs.getString("phone"));
+              
+
+                //Agrego el empleado a la Lista
+                laListaDeRegistrosADevolver.add(aCustomer);
+            }
+            
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+            return laListaDeRegistrosADevolver;
+        } catch (SQLException e) {
+            System.out.println(e);
+            laListaDeRegistrosADevolver = null;
+            return laListaDeRegistrosADevolver;
+        }
+    }
+     
+     public boolean createEmployee(Customer customerComeFromLogic) {
+
+        try {
+
+            //Abro conexiones
+            PreparedStatement sentencia = preparedStateent("insert into tbcustomer values (?,?,?,?,?)");
+            sentencia.setString(1, "0"); //ID
+            sentencia.setString(2, customerComeFromLogic.getIdCard());
+            sentencia.setString(3, customerComeFromLogic.getName());
+            sentencia.setString(4, customerComeFromLogic.getLastName());
+            sentencia.setString(5, customerComeFromLogic.getPhone());
+
+
+            sentencia.execute(); //Ejecuta el SQL 
+
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+      
+     public boolean guardarEnBaseDeDatosCustomer(Customer customerComeFromLogic) {
+
+        try {
+
+            //Abro conexiones
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbcustomer");
+            ResultSet rs = sentencia.executeQuery();
+            
+            while (rs.next()) {
+
+                if (rs.getString("idCard").equals(customerComeFromLogic.getIdCard())) {
+                    sentencia.close();
+                    rs.close();
+                    connectionSQL().close();
+                    return false;
+                    
+                } 
+            }
+
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+            
+            createEmployee(customerComeFromLogic);  
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+     
+      public boolean updateCustomer(Customer customerComeFromLogic){
+     
+        try {
+            PreparedStatement sentencia=preparedStateent("UPDATE tbcustomer SET idCard=?,name=?,lastName=?,phone=? WHERE id = ?");
+            
+            sentencia.setString(1, customerComeFromLogic.getIdCard());
+            sentencia.setString(2, customerComeFromLogic.getName());
+            sentencia.setString(3, customerComeFromLogic.getLastName());
+            sentencia.setString(4, customerComeFromLogic.getPhone());
+            sentencia.setString(5, customerComeFromLogic.getId()); //ID
+            
+            sentencia.execute();
+            sentencia.close();
+            connectionSQL().close();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        }
+    }
+      
+      public boolean deleteCustomer(Customer customer){
+        
+        try{
+            //Abro conexiones
+           
+            // selecr
+            PreparedStatement sentencia=preparedStateent("DELETE FROM tbcustomer WHERE idCard = ?");
+            sentencia.setString(1, customer.getIdCard());
+            
+            sentencia.execute(); //Ejecuta el SQL 
+            
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+            
+            return true;
+            
+        }catch (Exception e){
+            System.out.println(e.toString());
+            return false;
+        }
+    }
 }
