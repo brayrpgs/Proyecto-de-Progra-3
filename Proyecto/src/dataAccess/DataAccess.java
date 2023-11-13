@@ -234,7 +234,7 @@ public class DataAccess {
         }
     }
      
-     public boolean createEmployee(Customer customerComeFromLogic) {
+     public boolean createCustomer(Customer customerComeFromLogic) {
 
         try {
 
@@ -284,7 +284,7 @@ public class DataAccess {
             sentencia.close();
             connectionSQL().close();
             
-            createEmployee(customerComeFromLogic);  
+            createCustomer(customerComeFromLogic);  
             return true;
 
         } catch (SQLException e) {
