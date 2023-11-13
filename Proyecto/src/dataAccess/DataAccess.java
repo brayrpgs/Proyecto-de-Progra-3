@@ -6,6 +6,7 @@ package dataAccess;
 
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Connection;
+import domain.Article;
 import domain.Customer;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -322,6 +323,143 @@ public class DataAccess {
             // selecr
             PreparedStatement sentencia=preparedStateent("DELETE FROM tbcustomer WHERE idCard = ?");
             sentencia.setString(1, customer.getIdCard());
+            
+            sentencia.execute(); //Ejecuta el SQL 
+            
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+            
+            return true;
+            
+        }catch (Exception e){
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+      
+       public List<Article> consultarTodosLosRegistrosEnBaseDeDatosArticle() {
+        List<Article> laListaDeRegistrosADevolver = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbarticles");
+           ResultSet rs = sentencia.executeQuery();
+
+            while (rs.next()) { //¿Existen registros?
+                //Seteo un empleado
+                Article aArticle = new Article();
+                aArticle.setId(rs.getString("id"));
+                aArticle.setBrand(rs.getString("brand"));
+                aArticle.setDescription(rs.getString("description"));
+                aArticle.setCategory(rs.getString("category"));
+                aArticle.setQuantity(Integer.parseInt(rs.getString("quantityAvailable")));
+                aArticle.setPrice(Double.parseDouble(rs.getString("unitPrice")));
+
+                //Agrego el empleado a la Lista
+                laListaDeRegistrosADevolver.add(aArticle);
+            }
+            
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+            return laListaDeRegistrosADevolver;
+        } catch (SQLException e) {
+            System.out.println(e);
+            laListaDeRegistrosADevolver = null;
+            return laListaDeRegistrosADevolver;
+        }
+    }
+       
+        public boolean createArticle(Article articleComeFromLogic) {
+
+        try {
+
+            //Abro conexiones
+            PreparedStatement sentencia = preparedStateent("insert into tbarticles values (?,?,?,?,?,?)");
+            sentencia.setString(1, "0"); //ID
+            sentencia.setString(2, articleComeFromLogic.getBrand());
+            sentencia.setString(3, articleComeFromLogic.getDescription());
+            sentencia.setString(4, articleComeFromLogic.getCategory());
+            sentencia.setString(5, String.valueOf(articleComeFromLogic.getQuantity()));
+            sentencia.setString(6, String.valueOf(articleComeFromLogic.getPrice()));
+
+
+            sentencia.execute(); //Ejecuta el SQL 
+
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+    
+        public boolean guardarEnBaseDeDatosArticle(Article articleComeFromLogic) {
+
+        try {
+
+            //Abro conexiones
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbarticles");
+            ResultSet rs = sentencia.executeQuery();
+            
+            while (rs.next()) {
+
+                if (rs.getString("brand").equals(articleComeFromLogic.getBrand()) && rs.getString("description").equals(articleComeFromLogic.getDescription()) && rs.getString("category").equals(articleComeFromLogic.getCategory())) {
+                    sentencia.close();
+                    rs.close();
+                    connectionSQL().close();
+                    return false;
+                    
+                } 
+            }
+
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+            
+            createArticle(articleComeFromLogic);  
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+        
+        public boolean updateArticle(Article articleComeFromLogic){
+     
+        try {
+            PreparedStatement sentencia=preparedStateent("UPDATE tbarticles SET brand=?,descrption=?,category=?,quantity=?,price=? WHERE id = ?");
+            
+            sentencia.setString(1, articleComeFromLogic.getBrand());
+            sentencia.setString(2, articleComeFromLogic.getDescription());
+            sentencia.setString(3, articleComeFromLogic.getCategory());
+            sentencia.setString(4, String.valueOf(articleComeFromLogic.getQuantity()));
+            sentencia.setString(5, String.valueOf(articleComeFromLogic.getPrice()));
+            sentencia.setString(6, articleComeFromLogic.getId());
+            
+            
+            sentencia.execute();
+            sentencia.close();
+            connectionSQL().close();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        }
+    }
+        
+        public boolean deleteArticle(Article article){
+        
+        try{
+            //Abro conexiones
+           
+            // selecr
+            PreparedStatement sentencia=preparedStateent("DELETE FROM tbarticles WHERE id = ?");
+            sentencia.setString(1, article.getId());
             
             sentencia.execute(); //Ejecuta el SQL 
             
