@@ -141,7 +141,7 @@ public class Login extends javax.swing.JFrame {
             
             if (new Logic().isEmployee(employee)) {
                 dispose();
-                new PrincipalForm();
+                new PrincipalGUI();
                 
             } else {
 

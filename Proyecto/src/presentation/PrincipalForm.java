@@ -281,7 +281,7 @@ public class PrincipalForm extends javax.swing.JFrame {
         
         CRUDInternalForm c = new CRUDInternalForm();
         jDesktopPane.add(c);
-        c.setTitle("Mostrar vendedores");
+        c.setTitle("Mostrbeghgghar vendedores");
         
         //Apagando labels
         c.jLabel1.setVisible(false);

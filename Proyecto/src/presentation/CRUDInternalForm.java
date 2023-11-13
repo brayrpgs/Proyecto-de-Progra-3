@@ -4,6 +4,8 @@
  */
 package presentation;
 
+import domain.Article;
+import domain.Customer;
 import domain.Employee;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -230,62 +232,17 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
 
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
         // TODO add your handling code here:
-        if(btn1.getText() == "Agregar vendedor"){
+        if(btn1.getText().equals("Agregar vendedor")){
             createEmployee();
-        }
-    }//GEN-LAST:event_btn1ActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-        if(btn2.getText().equals("Modificar")){
             
-            employee = new Employee();
+        } else if(btn1.getText().equals("Agregar cliente")){
+            createCustomer();
             
-            String id = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
-            String idCard = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1));
-            String name = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2));
-            String lastName = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3));
-            String phone = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4));
-            String username = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 5));
-            String password = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 6));
-                          
-            txt1.setText(idCard);
-            txt2.setText(name);
-            txt3.setText(lastName);
-            txt4.setText(phone);
-            txt5.setText(username);
-            txt6.setText(password);
-            
-            employee.setId(id);
-            
-            
-        } else if(btn2.getText().equals("Eliminar")){
+        } else if(btn1.getText().equals("Agregar articulo")){
         
-            employee = new Employee();
-            
-            String id = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
-            String idCard = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1));
-            String name = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2));
-            String lastName = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3));
-            String phone = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4));
-            String username = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 5));
-            String password = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 6));
-                          
-            txt1.setText(idCard);
-            txt2.setText(name);
-            txt3.setText(lastName);
-            txt4.setText(phone);
-            txt5.setText(username);
-            txt6.setText(password);
-            
-            employee.setId(id);
+            createArticle();
         
-        }
-    }//GEN-LAST:event_jTable1MouseClicked
-
-    private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
-        // TODO add your handling code here:
-        if(btn2.getText().equals("Modificar")){
+        }else if(btn1.getText().equals("Modificar vendedor")){
                 
             
             if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText())){
@@ -330,7 +287,7 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             }
             
             
-        } else if(btn2.getText().equals("Eliminar")){
+        } else if(btn1.getText().equals("Eliminar vendedor")){
         
             if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText())){
             
@@ -356,7 +313,240 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
                 
             }
         
+        } else if(btn1.getText().equals("Modificar cliente")){
+        
+            if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), ".", ".")){
+            
+                showMessage("Datos incorrectos", "Error al actualizar el cliente", JOptionPane.ERROR_MESSAGE);
+                return;
+            } 
+            
+            customer.setIdCard(txt1.getText());
+            customer.setName(txt2.getText());
+            customer.setLastName(txt3.getText());
+            customer.setPhone(txt4.getText());
+                       
+            if(true){ //Logica de actualizar
+                
+                customer = null;
+                showMessage("Cliente actualizado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+                
+                refreshTable();
+                //jTable1.removeColumn(jTable1.getColumn("Id"));
+                cleanData();
+                
+            } else {
+                
+                showMessage("Datos incorrectos", "Error al actualizar el cliente", JOptionPane.ERROR_MESSAGE);
+                
+            }
+        
+        } else if(btn1.getText().equals("Eliminar cliente")){
+            
+            if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), ".", ".")){
+            
+                showMessage("Datos incorrectos", "Error al eliminar el cliente", JOptionPane.ERROR_MESSAGE);
+                return;
+            } 
+               
+            customer.setIdCard(txt1.getText());
+            
+            if(true){ //Logica de eliminar
+                
+                customer = null;
+                showMessage("Cliente eliminado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+                
+                refreshTable();
+                //jTable1.removeColumn(jTable1.getColumn("Id"));
+                cleanData();
+                
+            } else {
+                
+                showMessage("Datos incorrectos", "Error al actualizar el cliente", JOptionPane.ERROR_MESSAGE);
+                
+            }
+            
+        } else if(btn1.getText().equals("Modificar articulo")){
+        
+            if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), ".")){
+            
+                showMessage("Datos incorrectos", "Error al actualizar el articulo", JOptionPane.ERROR_MESSAGE);
+                return;
+            } 
+            
+            article.setBrand(txt1.getText());
+            article.setDescription(txt2.getText());
+            article.setCategory(txt3.getText());
+            article.setQuantity(Integer.parseInt(txt4.getText()));
+            article.setPrice(Double.parseDouble(txt5.getText()));
+            
+                       
+            if(true){ //Logica de actualizar
+                
+                article = null;
+                showMessage("Articulo actualizado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+                
+                refreshTable();
+                //jTable1.removeColumn(jTable1.getColumn("Id"));
+                cleanData();
+                
+            } else {
+                
+                showMessage("Datos incorrectos", "Error al actualizar el articulo", JOptionPane.ERROR_MESSAGE);
+                
+            }
+        
+        } else if(btn1.getText().equals("Eliminar articulo")){
+            
+            if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), ".")){
+            
+                showMessage("Datos incorrectos", "Error al eliminar el articulo", JOptionPane.ERROR_MESSAGE);
+                return;
+            } 
+               
+            article.setBrand(txt1.getText()); //Hay que ver que es lo que no cambia para borrar
+            
+            if(true){ //Logica de eliminar
+                
+                article = null;
+                showMessage("Articulo eliminado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+                
+                refreshTable();
+                //jTable1.removeColumn(jTable1.getColumn("Id"));
+                cleanData();
+                
+            } else {
+                
+                showMessage("Datos incorrectos", "Error al actualizar el articulo", JOptionPane.ERROR_MESSAGE);
+                
+            }
         }
+    }//GEN-LAST:event_btn1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        if(btn1.getText().equals("Modificar vendedor")){
+            
+            employee = new Employee();
+            
+            String id = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
+            String idCard = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1));
+            String name = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2));
+            String lastName = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3));
+            String phone = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4));
+            String username = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 5));
+            String password = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 6));
+                          
+            txt1.setText(idCard);
+            txt2.setText(name);
+            txt3.setText(lastName);
+            txt4.setText(phone);
+            txt5.setText(username);
+            txt6.setText(password);
+            
+            employee.setId(id);
+            
+            
+        } else if(btn1.getText().equals("Eliminar vendedor")){
+        
+            employee = new Employee();
+            
+            String id = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
+            String idCard = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1));
+            String name = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2));
+            String lastName = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3));
+            String phone = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4));
+            String username = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 5));
+            String password = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 6));
+                          
+            txt1.setText(idCard);
+            txt2.setText(name);
+            txt3.setText(lastName);
+            txt4.setText(phone);
+            txt5.setText(username);
+            txt6.setText(password);
+            
+            employee.setId(id);
+        
+        } else if(btn1.getText().equals("Modificar cliente")){
+        
+            customer = new Customer();
+            
+            String id = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
+            String idCard = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1));
+            String name = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2));
+            String lastName = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3));
+            String phone = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4));
+                                      
+            txt1.setText(idCard);
+            txt2.setText(name);
+            txt3.setText(lastName);
+            txt4.setText(phone);
+            
+            customer.setId(id);
+        
+        } else if(btn1.getText().equals("Eliminar cliente")){
+        
+            customer = new Customer();
+            
+            String id = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
+            String idCard = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1));
+            String name = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2));
+            String lastName = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3));
+            String phone = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4));
+                                      
+            txt1.setText(idCard);
+            txt2.setText(name);
+            txt3.setText(lastName);
+            txt4.setText(phone);
+            
+            customer.setId(id);
+                    
+        } else if(btn1.getText().equals("Modificar articulo")){
+        
+            article = new Article();
+            
+            String id = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
+            String brand = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1));
+            String description = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2));
+            String category = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3));
+            String quantity = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4));
+            String price = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 5));
+                                      
+            txt1.setText(brand);
+            txt2.setText(description);
+            txt3.setText(category);
+            txt4.setText(quantity);
+            txt5.setText(price);
+            
+            
+            article.setId(id);
+        
+        } else if(btn1.getText().equals("Eliminar articulo")){
+        
+            article = new Article();
+            
+            String id = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
+            String brand = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1));
+            String description = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2));
+            String category = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3));
+            String quantity = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4));
+            String price = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 5));
+                                      
+            txt1.setText(brand);
+            txt2.setText(description);
+            txt3.setText(category);
+            txt4.setText(quantity);
+            txt5.setText(price);
+            
+            customer.setId(id);
+                    
+        } 
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
+        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void txt4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt4KeyTyped
@@ -399,6 +589,63 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
         }
     }
     
+    //Crear cliente
+    public void createCustomer(){
+    
+        Customer customer = new Customer();
+        
+        if(!isEmpty(txt1.getText(),txt2.getText(),txt3.getText(),txt4.getText(),",",".")){
+            //Seteando la entidad
+            customer.setIdCard(txt1.getText());
+            customer.setName(txt2.getText());
+            customer.setLastName(txt3.getText());
+            customer.setPhone(txt4.getText());
+            
+            
+            if(false){ //Logica de agregar
+            
+                 showMessage("Datos incorrectos", "Error al guardar cliente", JOptionPane.ERROR_MESSAGE);
+            
+            } else {
+        
+                 showMessage("Cliente agregado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+                 cleanData();
+            }
+            
+        } else {
+            showMessage("Datos incorrectos", "Error al guardar cliente", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void createArticle(){
+    
+        Article article = new Article();
+        
+        if(!isEmpty(txt1.getText(),txt2.getText(),txt3.getText(),txt4.getText(),txt5.getText(),".")){
+            
+            //Seteando la entidad
+            article.setBrand(txt1.getText());
+            article.setDescription(txt2.getText());
+            article.setCategory(txt3.getText());
+            article.setQuantity(Integer.parseInt(txt4.getText()));
+            article.setPrice(Double.parseDouble(txt5.getText()));
+            
+            if(false){ //Logica de agregar
+            
+                 showMessage("Datos incorrectos", "Error al guardar el articulo", JOptionPane.ERROR_MESSAGE);
+            
+            } else {
+        
+                 showMessage("Articulo agregado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+                 cleanData();
+            }
+            
+        } else {
+            showMessage("Datos incorrectos", "Error al guardar el articulo", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    
     //Metodo para validar si algun dato esta vacio
     public boolean isEmpty(String t1, String t2, String t3, String t4, String t5, String t6){
         return t1.isBlank() || t2.isBlank() || t3.isBlank() || t4.isBlank() || t5.isBlank() || t6.isBlank();
@@ -429,6 +676,8 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
     }
 
     private Employee employee;
+    private Customer customer;
+    private Article article;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn1;
     public javax.swing.JButton btn2;
