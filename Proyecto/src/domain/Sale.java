@@ -9,6 +9,7 @@ package domain;
  * @author BrayRPGs
  */
 public class Sale {
+    private String id;
     private Employee employee;
     private Customer customer;
     private double subTotal;
@@ -18,7 +19,8 @@ public class Sale {
     public Sale() {
     }
 
-    public Sale(Employee employee, Customer customer, double subTotal, double descount, double total) {
+    public Sale(String id,Employee employee, Customer customer, double subTotal, double descount, double total) {
+        this.id = id;
         this.employee = employee;
         this.customer = customer;
         this.subTotal = subTotal;

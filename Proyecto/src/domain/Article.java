@@ -8,17 +8,19 @@ package domain;
  *
  * @author BrayRPGs
  */
-public class Articles {
+public class Article {
+    private String id;
     private String brand;
     private String description;
     private String category;
     private int quantity;
     private double price;
 
-    public Articles() {
+    public Article() {
     }
 
-    public Articles(String brand, String description, String category, int quantity, double price) {
+    public Article(String id,String brand, String description, String category, int quantity, double price) {
+        this.id = id;
         this.brand = brand;
         this.description = description;
         this.category = category;
@@ -66,6 +68,14 @@ public class Articles {
         this.price = price;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     @Override
     public String toString() {
         return "Articles{" + "brand=" + brand + ", description=" + description + ", category=" + category + ", quantity=" + quantity + ", price=" + price + '}';
