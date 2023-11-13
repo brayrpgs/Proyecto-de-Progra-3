@@ -46,13 +46,20 @@ public class Logic {
         String[] tag = {"Id", "Cedula", "Nombre", "Apellidos", "Telefono", "Usuario", "Contraseña"};
         return tag;
     }
-    
-    public boolean update(Employee employee){
+
+    public boolean update(Employee employee) {
         return new DataAccess().updateEmployee(employee);
     }
-    
-    public boolean deleteEmployee(Employee employee){
+
+    public boolean deleteEmployee(Employee employee) {
         return new dataAccess.DataAccess().deleteEmployee(employee);
     }
 
+    public String[] tagNameArticles() {
+        String[] tag = {"Id", "Marca", "Descricion", "Categoria", "Cantidad Disponible", "Precio Unitario"};
+        return tag;
+    }
+    
+    
+    
 }
