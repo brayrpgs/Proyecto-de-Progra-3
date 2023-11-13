@@ -6,6 +6,8 @@ package logic;
 
 import domain.Employee;
 import dataAccess.DataAccess;
+import domain.Article;
+import domain.Customer;
 import java.util.List;
 
 /**
@@ -55,11 +57,68 @@ public class Logic {
         return new dataAccess.DataAccess().deleteEmployee(employee);
     }
 
+    public String[] tagNameCustomer() {
+        String[] tag = {"Id", "Cedula", "Nombre", "Apellidos", "Telefono"};
+        return tag;
+    }
+
+    public Object[][] allDataCustomer() {
+        List<Customer> list = new DataAccess().consultarTodosLosRegistrosEnBaseDeDatosCustomer();
+        Object[][] dataResult = new Object[list.size()][5];
+        int i = 0;
+        for (Customer data : list) {
+            dataResult[i][0] = data.getId();
+            dataResult[i][1] = data.getIdCard();
+            dataResult[i][2] = data.getName();
+            dataResult[i][3] = data.getLastName();
+            dataResult[i][4] = data.getPhone();
+            i++;
+        }
+        return dataResult;
+    }
+    
+    public boolean customerIsRepeat(Customer customer) {
+        return new DataAccess().guardarEnBaseDeDatosCustomer(customer);
+    }
+
+    public boolean updateCustomer(Customer customer) {
+        return new DataAccess().updateCustomer(customer);
+    }
+
+    public boolean deleteCustomer(Customer customer) {
+        return new DataAccess().deleteCustomer(customer);
+    }
+
     public String[] tagNameArticles() {
         String[] tag = {"Id", "Marca", "Descricion", "Categoria", "Cantidad Disponible", "Precio Unitario"};
         return tag;
     }
     
+    public Object[][] allDataArticles() {
+        List<Article> list = new DataAccess().consultarTodosLosRegistrosEnBaseDeDatosArticle();
+        Object[][] dataResult = new Object[list.size()][6];
+        int i = 0;
+        for (Article data : list) {
+            dataResult[i][0] = data.getId();
+            dataResult[i][1] = data.getBrand();
+            dataResult[i][2] = data.getDescription();
+            dataResult[i][3] = data.getCategory();
+            dataResult[i][4] = data.getQuantity();
+            dataResult[i][6] = data.getPrice();
+            i++;
+        }
+        return dataResult;
+    }
     
+    public boolean ArticleIsRepeat(Article article) {
+        return new DataAccess().guardarEnBaseDeDatosArticle(article);
+    }
     
+    public boolean updateArticle(Article article){
+        return new DataAccess().updateArticle(article);
+    }
+    
+    public boolean deleteArticle(Article article){
+        return new DataAccess().deleteArticle(article);
+    }
 }
