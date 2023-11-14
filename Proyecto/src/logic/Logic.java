@@ -50,7 +50,12 @@ public class Logic {
     }
 
     public boolean update(Employee employee) {
-        return new DataAccess().aux(employee);
+        return new DataAccess().modificarEnBaseDeDatos(employee);
+        for (Employee data : temp) {
+                if (data.getIdCard().equals(idCard) || data.getUserName().equals(username)) {
+                    return false;
+                }
+            }
     }
 
     public boolean deleteEmployee(Employee employee) {

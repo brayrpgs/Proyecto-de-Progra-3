@@ -157,62 +157,13 @@ public class DataAccess {
         }
     }
 
-    public boolean modificarEnBaseDeDatos(Employee employeeComeFromLogic) {
+    public List<Employee> modificarEnBaseDeDatos(Employee employeeComeFromLogic) {
 
+        List<Employee> employeeList = new ArrayList<>();
         try {
 
             //Abro conexiones
-            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee");
-            ResultSet rs = sentencia.executeQuery();
-            boolean c = true;
-            boolean n = true;
-
-            while (rs.next()) {
-                /*
-                     c=rs.getString("idCard").equals(employeeComeFromLogic.getIdCard());
-                     n=rs.getString("username").equals(employeeComeFromLogic.getUserName());
-                     System.out.println("c"+c+"\nn"+n);
-                    if (c && !n) {
-                       
-
-                    }else if(!c && n){
-                        
-                    }else if(c&&n==false){
-                        
-                    }else{
-                        sentencia.close();
-                        rs.close();
-                        connectionSQL().close();
-                        System.out.println("encontre la cedula o el nombre de usuario en bd sali" );
-                        return false;
-                    
-                    }
-                 */
-
-            }
-
-            //Cierro conexiones
-            sentencia.close();
-            connectionSQL().close();
-            updateEmployee(employeeComeFromLogic);
-            return true;
-        } catch (SQLException e) {
-            System.out.println(e.toString());
-            return false;
-        }
-    }
-
-    public boolean aux(Employee employeeComeFromLogic) {
-
-        List<Employee> temp = new ArrayList<>();
-        String idCard = employeeComeFromLogic.getIdCard();
-        String username = employeeComeFromLogic.getUserName();
-
-        try {
-
-            String aux = employeeComeFromLogic.getId();
-            //Abro conexiones
-            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee WHERE id <> " + aux);
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee WHERE id <> " + employeeComeFromLogic.getId());
             ResultSet rs = sentencia.executeQuery();
 
             while (rs.next()) {
@@ -225,26 +176,19 @@ public class DataAccess {
                 tempEmp.setPhone(rs.getString("phone"));
                 tempEmp.setUserName(rs.getString("username"));
                 tempEmp.setId(rs.getString("id")); //ID
-                temp.add(tempEmp);
+                employeeList.add(tempEmp);
             }
-            for (Employee data : temp) {
-                if (data.getIdCard().equals(idCard) || data.getUserName().equals(username)) {
-                    return false;
-                }
-            }
+            
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
 
-            updateEmployee(employeeComeFromLogic);
-            return true;
+            return employeeList;
 
         } catch (SQLException e) {
             System.out.println(e.toString());
-            return false;
+            return null;
         }
-
-        //return true;
     }
 
     public boolean updateEmployee(Employee employeeComeFromLogic) {
