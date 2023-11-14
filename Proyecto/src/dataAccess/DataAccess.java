@@ -157,6 +157,51 @@ public class DataAccess {
             return false;
         }
     }
+    public boolean modificarEnBaseDeDatos(Employee employeeComeFromLogic) {
+
+        try {
+
+            //Abro conexiones
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee");
+            ResultSet rs = sentencia.executeQuery();
+            boolean c=true;
+            boolean n=true;
+            
+            
+            while (rs.next()) {
+                    /*
+                     c=rs.getString("idCard").equals(employeeComeFromLogic.getIdCard());
+                     n=rs.getString("username").equals(employeeComeFromLogic.getUserName());
+                     System.out.println("c"+c+"\nn"+n);
+                    if (c && !n) {
+                       
+
+                    }else if(!c && n){
+                        
+                    }else if(c&&n==false){
+                        
+                    }else{
+                        sentencia.close();
+                        rs.close();
+                        connectionSQL().close();
+                        System.out.println("encontre la cedula o el nombre de usuario en bd sali" );
+                        return false;
+                    
+                    }
+                    */
+                     
+            }
+                     
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+            updateEmployee(employeeComeFromLogic);  
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
     
     public boolean aux(Employee employeeComeFromLogic){
         
@@ -222,7 +267,7 @@ public class DataAccess {
      
         try {
             PreparedStatement sentencia=preparedStateent("UPDATE tbemployee SET idCard=?,name=?,lastName=?,phone=?,username=?,password=? WHERE id = ?");
-            
+   
             sentencia.setString(1, employeeComeFromLogic.getIdCard());
             sentencia.setString(2, employeeComeFromLogic.getName());
             sentencia.setString(3, employeeComeFromLogic.getLastName());

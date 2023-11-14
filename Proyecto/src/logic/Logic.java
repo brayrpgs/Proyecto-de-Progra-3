@@ -50,7 +50,6 @@ public class Logic {
     }
 
     public boolean update(Employee employee) {
-        
         return new DataAccess().aux(employee);
     }
 
