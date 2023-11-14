@@ -267,6 +267,39 @@ public class DataAccess {
         }
     }
 
+    public List<Customer> modificarEnBaseDeDatosCustomer(Customer customerComeFromLogic) {
+
+        List<Customer> customerList = new ArrayList<>();
+        try {
+
+            //Abro conexiones
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbcustomer WHERE id <> " + customerComeFromLogic.getId());
+            ResultSet rs = sentencia.executeQuery();
+
+            while (rs.next()) {
+
+                Customer tempCus = new Customer();
+
+                tempCus.setIdCard(rs.getString("idCard"));
+                tempCus.setName(rs.getString("name"));
+                tempCus.setLastName(rs.getString("lastName"));
+                tempCus.setPhone(rs.getString("phone"));
+                tempCus.setId(rs.getString("id")); //ID
+                customerList.add(tempCus);
+            }
+            
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+
+            return customerList;
+
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+    
     public boolean createCustomer(Customer customerComeFromLogic) {
 
         try {
