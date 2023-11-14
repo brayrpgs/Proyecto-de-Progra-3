@@ -158,6 +158,66 @@ public class DataAccess {
         }
     }
     
+    public boolean aux(Employee employeeComeFromLogic){
+        
+        List<Employee> temp = new ArrayList<>();
+        String idCard = employeeComeFromLogic.getIdCard();
+        String username = employeeComeFromLogic.getUserName();
+        
+        try {
+
+            String aux = employeeComeFromLogic.getId();
+            //Abro conexiones
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee WHERE id <> " + aux);
+            ResultSet rs = sentencia.executeQuery();
+            
+            while (rs.next()) {
+
+             Employee tempEmp = new Employee();
+                
+             tempEmp.setIdCard(rs.getString("idCard"));
+            tempEmp.setName(rs.getString("name"));
+             tempEmp.setLastName(rs.getString("lastName"));
+            tempEmp.setPhone(rs.getString("phone"));
+             tempEmp.setUserName(rs.getString("username"));
+             tempEmp.setId(rs.getString("id")); //ID
+             
+            temp.add(tempEmp);
+             
+                //System.out.println(employeeComeFromLogic.toString());
+                
+            }
+
+            //System.out.println(idCard + "-" + username);
+            
+            for(Employee data: temp){
+                
+                //System.out.println(data.getIdCard() + "-" + data.getUserName() + "\n");
+                
+                if(data.getIdCard().equals(idCard) || data.getUserName().equals(username)){
+                    
+                    return false;
+                    
+                }
+                
+            }
+            
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+            
+            updateEmployee(employeeComeFromLogic);  
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+        
+        //return true;
+        
+    }
+    
      public boolean updateEmployee(Employee employeeComeFromLogic){
      
         try {

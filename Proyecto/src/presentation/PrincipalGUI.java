@@ -182,6 +182,11 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jmSales.setText("Ventas");
 
         mntmAddSale.setText("Agregar ventas");
+        mntmAddSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmAddSaleActionPerformed(evt);
+            }
+        });
         jmSales.add(mntmAddSale);
 
         mntmReadSale.setText("Consultar ventas");
@@ -270,7 +275,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
                  
         //Datos en la tabla
         c.jTable1.setModel(new DefaultTableModel(new Logic().allDataArticles(), new Logic().tagNameArticles())); 
-        
+                
         c.show();
                 
     }//GEN-LAST:event_mntmReadArticleActionPerformed
@@ -597,6 +602,16 @@ public class PrincipalGUI extends javax.swing.JFrame {
         c.show();
         
     }//GEN-LAST:event_mntmDeleteArticleActionPerformed
+
+    private void mntmAddSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmAddSaleActionPerformed
+        // TODO add your handling code here:
+        
+        InternalSalesForm s = new InternalSalesForm();
+        jDesktopPane.add(s);
+       
+        s.show();
+        
+    }//GEN-LAST:event_mntmAddSaleActionPerformed
                                                                                                
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
