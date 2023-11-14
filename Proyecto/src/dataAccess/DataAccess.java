@@ -293,7 +293,7 @@ public class DataAccess {
             connectionSQL().close();
 
             return customerList;
-
+//Hola
         } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
