@@ -293,7 +293,7 @@ public class DataAccess {
             connectionSQL().close();
 
             return customerList;
-//Hola
+
         } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
@@ -432,7 +432,41 @@ public class DataAccess {
             return laListaDeRegistrosADevolver;
         }
     }
+    
+    public List<Article> modificarEnBaseDeDatosArticle(Article articleComeFromLogic) {
 
+        List<Article> articleList = new ArrayList<>();
+        try {
+
+            //Abro conexiones
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbarticle WHERE id <> " + articleComeFromLogic.getId());
+            ResultSet rs = sentencia.executeQuery();
+
+            while (rs.next()) {
+
+                Article tempArt = new Article();
+
+                tempArt.setBrand(rs.getString("brand"));
+                tempArt.setDescription(rs.getString("description"));
+                tempArt.setCategory(rs.getString("category"));
+                tempArt.setQuantity(Integer.parseInt(rs.getString("quantityAvailable")));
+                tempArt.setPrice(Double.parseDouble(rs.getString("unitPrice")));
+                tempArt.setId(rs.getString("id")); //ID
+                articleList.add(tempArt);
+            }
+            
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+
+            return articleList;
+
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+    
     public boolean createArticle(Article articleComeFromLogic) {
 
         try {

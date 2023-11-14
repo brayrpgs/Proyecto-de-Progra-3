@@ -91,7 +91,7 @@ public class Logic {
     public boolean updateCustomer(Customer customer) {
         List<Customer> list = new DataAccess().modificarEnBaseDeDatosCustomer(customer);
         for (Customer data : list) {
-            if (data.getIdCard().equals(data.getIdCard())) {
+            if (data.getIdCard().equals(customer.getIdCard())) {
                 return false;
             }
         }
