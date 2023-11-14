@@ -52,8 +52,8 @@ public class Logic {
     public boolean update(Employee employee) {
         List<Employee> list = new DataAccess().modificarEnBaseDeDatos(employee);
         for (Employee data : list) {
-            if (data.getIdCard().equals(employee.getIdCard())
-                    || data.getUserName().equals(employee.getUserName())) {
+            if (data.getIdCard().equals(data.getIdCard())
+                    || data.getUserName().equals(data.getIdCard())) {
                 return false;
             }
         }
@@ -89,6 +89,12 @@ public class Logic {
     }
 
     public boolean updateCustomer(Customer customer) {
+        List<Customer> list = new DataAccess().modificarEnBaseDeDatosCustomer(customer);
+        for (Customer data : list) {
+            if (data.getIdCard().equals(data.getIdCard())) {
+                return false;
+            }
+        }
         return new DataAccess().updateCustomer(customer);
     }
 
