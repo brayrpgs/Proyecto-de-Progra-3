@@ -432,7 +432,7 @@ public class DataAccess {
         public boolean updateArticle(Article articleComeFromLogic){
      
         try {
-            PreparedStatement sentencia=preparedStateent("UPDATE tbarticles SET brand=?,descrption=?,category=?,quantity=?,price=? WHERE id = ?");
+            PreparedStatement sentencia=preparedStateent("UPDATE tbarticles SET brand=?,description=?,category=?,quantityAvailable=?,unitPrice=? WHERE id = ?");
             
             sentencia.setString(1, articleComeFromLogic.getBrand());
             sentencia.setString(2, articleComeFromLogic.getDescription());

@@ -269,9 +269,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         c.btn1.setVisible(false);
                  
         //Datos en la tabla
-        //c.jTable1.setModel(new DefaultTableModel(new Logic().allData(), new Logic().tagName())); Logica de tabla
-        //c.jTable1.removeColumn(c.jTable1.getColumn("Id"));
-        //c.jTable1.removeColumn(c.jTable1.getColumn("Contraseña"));
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allDataArticles(), new Logic().tagNameArticles())); 
         
         c.show();
                 
@@ -437,10 +435,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
         c.btn1.setVisible(false);
                  
         //Datos en la tabla
-        //c.jTable1.setModel(new DefaultTableModel(); //Logica de mostrar
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allDataCustomer(),new Logic().tagNameCustomer())); 
         c.jTable1.removeColumn(c.jTable1.getColumn("Id"));
-        c.jTable1.removeColumn(c.jTable1.getColumn("Usuario"));
-        c.jTable1.removeColumn(c.jTable1.getColumn("Contraseña"));
         
         c.show();
         
@@ -468,10 +464,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
         c.btn1.setText("Modificar cliente");
            
         //Datos en la tabla
-        //c.jTable1.setModel(new DefaultTableModel(new Logic().allData(), new Logic().tagName()));//Logica de llenar
-        //c.jTable1.removeColumn(c.jTable1.getColumn("Id"));
-        //c.jTable1.removeColumn(c.jTable1.getColumn("Usuario"));
-        //c.jTable1.removeColumn(c.jTable1.getColumn("Contraseña"));
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allDataCustomer(),new Logic().tagNameCustomer())); 
+        c.jTable1.removeColumn(c.jTable1.getColumn("Id"));
         
         c.show();
         
@@ -505,9 +499,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
         c.btn1.setText("Eliminar cliente");
            
         //Falta cargar datos en la tabla
-        //c.jTable1.setModel(new DefaultTableModel(new Logic().allData(), new Logic().tagName())); LogicA DE ELIMINAR
-       // c.jTable1.removeColumn(c.jTable1.getColumn("Id"));
-        //c.jTable1.removeColumn(c.jTable1.getColumn("Contraseña"));
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allDataCustomer(),new Logic().tagNameCustomer())); 
+        c.jTable1.removeColumn(c.jTable1.getColumn("Id"));
         
         c.show();
         
@@ -557,19 +550,16 @@ public class PrincipalGUI extends javax.swing.JFrame {
         c.jLabel3.setText("Categoria");
         c.jLabel4.setText("Cantidad");
         c.jLabel5.setText("Precio");
+        c.jLabel6.setText("Id");
         
-        c.jLabel6.setVisible(false);
-        c.txt6.setEnabled(false);
+        c.txt6.setEditable(false);
         
         //Agregando los botones
         c.btn2.setVisible(false);       
         c.btn1.setText("Modificar articulo");
            
         //Datos en la tabla
-        //c.jTable1.setModel(new DefaultTableModel(new Logic().allData(), new Logic().tagName()));//Logica de llenar
-        //c.jTable1.removeColumn(c.jTable1.getColumn("Id"));
-        //c.jTable1.removeColumn(c.jTable1.getColumn("Usuario"));
-        //c.jTable1.removeColumn(c.jTable1.getColumn("Contraseña"));
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allDataArticles(), new Logic().tagNameArticles())); 
         
         c.show();
         
@@ -588,24 +578,21 @@ public class PrincipalGUI extends javax.swing.JFrame {
         c.jLabel3.setText("Categoria");
         c.jLabel4.setText("Cantidad");
         c.jLabel5.setText("Precio");
-        
-        c.jLabel6.setVisible(false);
-        c.txt6.setEnabled(false);
-        
+        c.jLabel6.setText("Id");
+                
         c.txt1.setEditable(false);
         c.txt2.setEditable(false);
         c.txt3.setEditable(false);
         c.txt4.setEditable(false);
-              
+        c.txt5.setEditable(false);
+        c.txt6.setEditable(false);      
         
         //Agregando los botones      
         c.btn2.setVisible(false);
         c.btn1.setText("Eliminar articulo");
            
-        //Falta cargar datos en la tabla
-        //c.jTable1.setModel(new DefaultTableModel(new Logic().allData(), new Logic().tagName())); LogicA DE ELIMINAR
-       // c.jTable1.removeColumn(c.jTable1.getColumn("Id"));
-        //c.jTable1.removeColumn(c.jTable1.getColumn("Contraseña"));
+        //Cargar datos en la tabla
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allDataArticles(), new Logic().tagNameArticles())); 
         
         c.show();
         

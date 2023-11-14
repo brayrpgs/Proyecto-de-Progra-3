@@ -275,7 +275,7 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
                 employee = null;
                 showMessage("Vendedor actualizado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
                 
-                refreshTable();
+                refreshTable("Modificar vendedor");
                 jTable1.removeColumn(jTable1.getColumn("Id"));
                 jTable1.removeColumn(jTable1.getColumn("Contraseña"));
                 cleanData();
@@ -302,7 +302,7 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
                 employee = null;
                 showMessage("Vendedor eliminado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
                 
-                refreshTable();
+                refreshTable("Eliminar vendedor");
                 jTable1.removeColumn(jTable1.getColumn("Id"));
                 jTable1.removeColumn(jTable1.getColumn("Contraseña"));
                 cleanData();
@@ -326,13 +326,13 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             customer.setLastName(txt3.getText());
             customer.setPhone(txt4.getText());
                        
-            if(true){ //Logica de actualizar
+            if(new Logic().updateCustomer(customer)){ 
                 
                 customer = null;
                 showMessage("Cliente actualizado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
                 
-                refreshTable();
-                //jTable1.removeColumn(jTable1.getColumn("Id"));
+                refreshTable("Modificar cliente");
+                jTable1.removeColumn(jTable1.getColumn("Id"));
                 cleanData();
                 
             } else {
@@ -351,13 +351,13 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
                
             customer.setIdCard(txt1.getText());
             
-            if(true){ //Logica de eliminar
+            if(new Logic().deleteCustomer(customer)){ 
                 
                 customer = null;
                 showMessage("Cliente eliminado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
                 
-                refreshTable();
-                //jTable1.removeColumn(jTable1.getColumn("Id"));
+                refreshTable("Eliminar cliente");
+                jTable1.removeColumn(jTable1.getColumn("Id"));
                 cleanData();
                 
             } else {
@@ -368,7 +368,7 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             
         } else if(btn1.getText().equals("Modificar articulo")){
         
-            if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), ".")){
+            if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText())){
             
                 showMessage("Datos incorrectos", "Error al actualizar el articulo", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -379,15 +379,16 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             article.setCategory(txt3.getText());
             article.setQuantity(Integer.parseInt(txt4.getText()));
             article.setPrice(Double.parseDouble(txt5.getText()));
+            article.setId(txt6.getText());
             
                        
-            if(true){ //Logica de actualizar
+            if(new Logic().updateArticle(article)){ 
                 
                 article = null;
                 showMessage("Articulo actualizado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
                 
-                refreshTable();
-                //jTable1.removeColumn(jTable1.getColumn("Id"));
+                refreshTable("Modificar articulo");
+                
                 cleanData();
                 
             } else {
@@ -398,21 +399,21 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
         
         } else if(btn1.getText().equals("Eliminar articulo")){
             
-            if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), ".")){
+            if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText())){
             
                 showMessage("Datos incorrectos", "Error al eliminar el articulo", JOptionPane.ERROR_MESSAGE);
                 return;
             } 
                
-            article.setBrand(txt1.getText()); //Hay que ver que es lo que no cambia para borrar
+            article.setId(txt6.getText()); 
             
-            if(true){ //Logica de eliminar
+            if(new Logic().deleteArticle(article)){ 
                 
                 article = null;
                 showMessage("Articulo eliminado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
                 
-                refreshTable();
-                //jTable1.removeColumn(jTable1.getColumn("Id"));
+                refreshTable("Eliminar articulo");
+           
                 cleanData();
                 
             } else {
@@ -512,13 +513,13 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             String category = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3));
             String quantity = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4));
             String price = String.valueOf(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 5));
-                                      
-            txt1.setText(brand);
-            txt2.setText(description);
-            txt3.setText(category);
+    
+            txt1.setText(brand.toUpperCase());
+            txt2.setText(description.toUpperCase());
+            txt3.setText(category.toUpperCase());
             txt4.setText(quantity);
             txt5.setText(price);
-            
+            txt6.setText(id);
             
             article.setId(id);
         
@@ -535,11 +536,12 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
                                       
             txt1.setText(brand);
             txt2.setText(description);
-            txt3.setText(category);
+            txt3.setText(category); 
             txt4.setText(quantity);
             txt5.setText(price);
+            txt6.setText(id);
             
-            customer.setId(id);
+            article.setId(id);
                     
         } 
     }//GEN-LAST:event_jTable1MouseClicked
@@ -602,7 +604,7 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             customer.setPhone(txt4.getText());
             
             
-            if(false){ //Logica de agregar
+            if(!new Logic().customerIsRepeat(customer)){ 
             
                  showMessage("Datos incorrectos", "Error al guardar cliente", JOptionPane.ERROR_MESSAGE);
             
@@ -624,13 +626,13 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
         if(!isEmpty(txt1.getText(),txt2.getText(),txt3.getText(),txt4.getText(),txt5.getText(),".")){
             
             //Seteando la entidad
-            article.setBrand(txt1.getText());
-            article.setDescription(txt2.getText());
-            article.setCategory(txt3.getText());
+            article.setBrand(txt1.getText().toUpperCase());
+            article.setDescription(txt2.getText().toUpperCase());
+            article.setCategory(txt3.getText().toUpperCase());
             article.setQuantity(Integer.parseInt(txt4.getText()));
             article.setPrice(Double.parseDouble(txt5.getText()));
             
-            if(false){ //Logica de agregar
+            if(!new Logic().ArticleIsRepeat(article)){ 
             
                  showMessage("Datos incorrectos", "Error al guardar el articulo", JOptionPane.ERROR_MESSAGE);
             
@@ -657,9 +659,22 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
     }
     
     //Metodo para actualizar tabla
-    public void refreshTable(){
+    public void refreshTable(String buttonName){
     
-        jTable1.setModel(new DefaultTableModel(new Logic().allData(), new Logic().tagName()));
+        if(buttonName.equals("Eliminar vendedor") || buttonName.equals("Modificar vendedor")){
+            
+            jTable1.setModel(new DefaultTableModel(new Logic().allData(), new Logic().tagName()));
+            
+        } else if(buttonName.equals("Eliminar cliente") || buttonName.equals("Modificar cliente")){
+        
+            jTable1.setModel(new DefaultTableModel(new Logic().allDataCustomer(),new Logic().tagNameCustomer())); 
+        
+        } else if(buttonName.equals("Eliminar articulo") || buttonName.equals("Modificar articulo")){
+        
+            jTable1.setModel(new DefaultTableModel(new Logic().allDataArticles(), new Logic().tagNameArticles()));
+        
+        }
+        
         
     }
     

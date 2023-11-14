@@ -104,7 +104,7 @@ public class Logic {
             dataResult[i][2] = data.getDescription();
             dataResult[i][3] = data.getCategory();
             dataResult[i][4] = data.getQuantity();
-            dataResult[i][6] = data.getPrice();
+            dataResult[i][5] = data.getPrice();
             i++;
         }
         return dataResult;
