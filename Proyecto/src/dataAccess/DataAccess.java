@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author Ceasar
@@ -31,9 +30,9 @@ public class DataAccess {
             return null;
         }
     }
-    
-    private PreparedStatement preparedStateent(String sentence){
-        
+
+    private PreparedStatement preparedStateent(String sentence) {
+
         PreparedStatement sentencia;
         try {
             sentencia = (PreparedStatement) connectionSQL().prepareStatement(sentence);
@@ -70,7 +69,7 @@ public class DataAccess {
         List<Employee> laListaDeRegistrosADevolver = new ArrayList<>();
         try {
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee");
-           ResultSet rs = sentencia.executeQuery();
+            ResultSet rs = sentencia.executeQuery();
 
             while (rs.next()) { //¿Existen registros?
                 //Seteo un empleado
@@ -86,7 +85,7 @@ public class DataAccess {
                 //Agrego el empleado a la Lista
                 laListaDeRegistrosADevolver.add(aEmployee);
             }
-            
+
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
@@ -133,7 +132,7 @@ public class DataAccess {
             //Abro conexiones
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee");
             ResultSet rs = sentencia.executeQuery();
-            
+
             while (rs.next()) {
 
                 if (rs.getString("idCard").equals(employeeComeFromLogic.getIdCard()) || rs.getString("username").equals(employeeComeFromLogic.getUserName())) {
@@ -141,15 +140,15 @@ public class DataAccess {
                     rs.close();
                     connectionSQL().close();
                     return false;
-                    
-                } 
+
+                }
             }
 
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
-            
-            createEmployee(employeeComeFromLogic);  
+
+            createEmployee(employeeComeFromLogic);
             return true;
 
         } catch (SQLException e) {
@@ -157,6 +156,7 @@ public class DataAccess {
             return false;
         }
     }
+
     public boolean modificarEnBaseDeDatos(Employee employeeComeFromLogic) {
 
         try {
@@ -164,12 +164,11 @@ public class DataAccess {
             //Abro conexiones
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee");
             ResultSet rs = sentencia.executeQuery();
-            boolean c=true;
-            boolean n=true;
-            
-            
+            boolean c = true;
+            boolean n = true;
+
             while (rs.next()) {
-                    /*
+                /*
                      c=rs.getString("idCard").equals(employeeComeFromLogic.getIdCard());
                      n=rs.getString("username").equals(employeeComeFromLogic.getUserName());
                      System.out.println("c"+c+"\nn"+n);
@@ -188,86 +187,71 @@ public class DataAccess {
                         return false;
                     
                     }
-                    */
-                     
+                 */
+
             }
-                     
+
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
-            updateEmployee(employeeComeFromLogic);  
+            updateEmployee(employeeComeFromLogic);
             return true;
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
         }
     }
-    
-    public boolean aux(Employee employeeComeFromLogic){
-        
+
+    public boolean aux(Employee employeeComeFromLogic) {
+
         List<Employee> temp = new ArrayList<>();
         String idCard = employeeComeFromLogic.getIdCard();
         String username = employeeComeFromLogic.getUserName();
-        
+
         try {
 
             String aux = employeeComeFromLogic.getId();
             //Abro conexiones
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbemployee WHERE id <> " + aux);
             ResultSet rs = sentencia.executeQuery();
-            
+
             while (rs.next()) {
 
-             Employee tempEmp = new Employee();
-                
-             tempEmp.setIdCard(rs.getString("idCard"));
-            tempEmp.setName(rs.getString("name"));
-             tempEmp.setLastName(rs.getString("lastName"));
-            tempEmp.setPhone(rs.getString("phone"));
-             tempEmp.setUserName(rs.getString("username"));
-             tempEmp.setId(rs.getString("id")); //ID
-             
-            temp.add(tempEmp);
-             
-                //System.out.println(employeeComeFromLogic.toString());
-                
-            }
+                Employee tempEmp = new Employee();
 
-            //System.out.println(idCard + "-" + username);
-            
-            for(Employee data: temp){
-                
-                //System.out.println(data.getIdCard() + "-" + data.getUserName() + "\n");
-                
-                if(data.getIdCard().equals(idCard) || data.getUserName().equals(username)){
-                    
-                    return false;
-                    
-                }
-                
+                tempEmp.setIdCard(rs.getString("idCard"));
+                tempEmp.setName(rs.getString("name"));
+                tempEmp.setLastName(rs.getString("lastName"));
+                tempEmp.setPhone(rs.getString("phone"));
+                tempEmp.setUserName(rs.getString("username"));
+                tempEmp.setId(rs.getString("id")); //ID
+                temp.add(tempEmp);
             }
-            
+            for (Employee data : temp) {
+                if (data.getIdCard().equals(idCard) || data.getUserName().equals(username)) {
+                    return false;
+                }
+            }
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
-            
-            updateEmployee(employeeComeFromLogic);  
+
+            updateEmployee(employeeComeFromLogic);
             return true;
 
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
         }
-        
+
         //return true;
-        
     }
-    
-     public boolean updateEmployee(Employee employeeComeFromLogic){
-     
+
+    public boolean updateEmployee(Employee employeeComeFromLogic) {
+
         try {
-            PreparedStatement sentencia=preparedStateent("UPDATE tbemployee SET idCard=?,name=?,lastName=?,phone=?,username=?,password=? WHERE id = ?");
-   
+            PreparedStatement sentencia = preparedStateent("UPDATE tbemployee SET idCard=?,name=?,lastName=?,phone=?,username=?,password=? WHERE id = ?");
+
             sentencia.setString(1, employeeComeFromLogic.getIdCard());
             sentencia.setString(2, employeeComeFromLogic.getName());
             sentencia.setString(3, employeeComeFromLogic.getLastName());
@@ -275,7 +259,7 @@ public class DataAccess {
             sentencia.setString(5, employeeComeFromLogic.getUserName());
             sentencia.setString(6, employeeComeFromLogic.getPassword());
             sentencia.setString(7, employeeComeFromLogic.getId()); //ID
-            
+
             sentencia.execute();
             sentencia.close();
             connectionSQL().close();
@@ -285,35 +269,35 @@ public class DataAccess {
             return false;
         }
     }
-     
-     public boolean deleteEmployee(Employee employee){
-        
-        try{
+
+    public boolean deleteEmployee(Employee employee) {
+
+        try {
             //Abro conexiones
-           
+
             // selecr
-            PreparedStatement sentencia=preparedStateent("DELETE FROM tbemployee WHERE username = ?");
+            PreparedStatement sentencia = preparedStateent("DELETE FROM tbemployee WHERE username = ?");
             sentencia.setString(1, employee.getUserName());
-            
+
             sentencia.execute(); //Ejecuta el SQL 
-            
+
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
-            
+
             return true;
-            
-        }catch (Exception e){
+
+        } catch (Exception e) {
             System.out.println(e.toString());
             return false;
         }
     }
-     
-     public List<Customer> consultarTodosLosRegistrosEnBaseDeDatosCustomer() {
+
+    public List<Customer> consultarTodosLosRegistrosEnBaseDeDatosCustomer() {
         List<Customer> laListaDeRegistrosADevolver = new ArrayList<>();
         try {
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbcustomer");
-           ResultSet rs = sentencia.executeQuery();
+            ResultSet rs = sentencia.executeQuery();
 
             while (rs.next()) { //¿Existen registros?
                 //Seteo un empleado
@@ -323,12 +307,11 @@ public class DataAccess {
                 aCustomer.setName(rs.getString("name"));
                 aCustomer.setLastName(rs.getString("lastName"));
                 aCustomer.setPhone(rs.getString("phone"));
-              
 
                 //Agrego el empleado a la Lista
                 laListaDeRegistrosADevolver.add(aCustomer);
             }
-            
+
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
@@ -339,8 +322,8 @@ public class DataAccess {
             return laListaDeRegistrosADevolver;
         }
     }
-     
-     public boolean createCustomer(Customer customerComeFromLogic) {
+
+    public boolean createCustomer(Customer customerComeFromLogic) {
 
         try {
 
@@ -352,7 +335,6 @@ public class DataAccess {
             sentencia.setString(4, customerComeFromLogic.getLastName());
             sentencia.setString(5, customerComeFromLogic.getPhone());
 
-
             sentencia.execute(); //Ejecuta el SQL 
 
             //Cierro conexiones
@@ -366,15 +348,15 @@ public class DataAccess {
             return false;
         }
     }
-      
-     public boolean guardarEnBaseDeDatosCustomer(Customer customerComeFromLogic) {
+
+    public boolean guardarEnBaseDeDatosCustomer(Customer customerComeFromLogic) {
 
         try {
 
             //Abro conexiones
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbcustomer");
             ResultSet rs = sentencia.executeQuery();
-            
+
             while (rs.next()) {
 
                 if (rs.getString("idCard").equals(customerComeFromLogic.getIdCard())) {
@@ -382,15 +364,15 @@ public class DataAccess {
                     rs.close();
                     connectionSQL().close();
                     return false;
-                    
-                } 
+
+                }
             }
 
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
-            
-            createCustomer(customerComeFromLogic);  
+
+            createCustomer(customerComeFromLogic);
             return true;
 
         } catch (SQLException e) {
@@ -398,18 +380,18 @@ public class DataAccess {
             return false;
         }
     }
-     
-      public boolean updateCustomer(Customer customerComeFromLogic){
-     
+
+    public boolean updateCustomer(Customer customerComeFromLogic) {
+
         try {
-            PreparedStatement sentencia=preparedStateent("UPDATE tbcustomer SET idCard=?,name=?,lastName=?,phone=? WHERE id = ?");
-            
+            PreparedStatement sentencia = preparedStateent("UPDATE tbcustomer SET idCard=?,name=?,lastName=?,phone=? WHERE id = ?");
+
             sentencia.setString(1, customerComeFromLogic.getIdCard());
             sentencia.setString(2, customerComeFromLogic.getName());
             sentencia.setString(3, customerComeFromLogic.getLastName());
             sentencia.setString(4, customerComeFromLogic.getPhone());
             sentencia.setString(5, customerComeFromLogic.getId()); //ID
-            
+
             sentencia.execute();
             sentencia.close();
             connectionSQL().close();
@@ -419,35 +401,35 @@ public class DataAccess {
             return false;
         }
     }
-      
-      public boolean deleteCustomer(Customer customer){
-        
-        try{
+
+    public boolean deleteCustomer(Customer customer) {
+
+        try {
             //Abro conexiones
-           
+
             // selecr
-            PreparedStatement sentencia=preparedStateent("DELETE FROM tbcustomer WHERE idCard = ?");
+            PreparedStatement sentencia = preparedStateent("DELETE FROM tbcustomer WHERE idCard = ?");
             sentencia.setString(1, customer.getIdCard());
-            
+
             sentencia.execute(); //Ejecuta el SQL 
-            
+
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
-            
+
             return true;
-            
-        }catch (Exception e){
+
+        } catch (Exception e) {
             System.out.println(e.toString());
             return false;
         }
     }
-      
-       public List<Article> consultarTodosLosRegistrosEnBaseDeDatosArticle() {
+
+    public List<Article> consultarTodosLosRegistrosEnBaseDeDatosArticle() {
         List<Article> laListaDeRegistrosADevolver = new ArrayList<>();
         try {
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbarticles");
-           ResultSet rs = sentencia.executeQuery();
+            ResultSet rs = sentencia.executeQuery();
 
             while (rs.next()) { //¿Existen registros?
                 //Seteo un empleado
@@ -462,7 +444,7 @@ public class DataAccess {
                 //Agrego el empleado a la Lista
                 laListaDeRegistrosADevolver.add(aArticle);
             }
-            
+
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
@@ -473,8 +455,8 @@ public class DataAccess {
             return laListaDeRegistrosADevolver;
         }
     }
-       
-        public boolean createArticle(Article articleComeFromLogic) {
+
+    public boolean createArticle(Article articleComeFromLogic) {
 
         try {
 
@@ -487,7 +469,6 @@ public class DataAccess {
             sentencia.setString(5, String.valueOf(articleComeFromLogic.getQuantity()));
             sentencia.setString(6, String.valueOf(articleComeFromLogic.getPrice()));
 
-
             sentencia.execute(); //Ejecuta el SQL 
 
             //Cierro conexiones
@@ -501,15 +482,15 @@ public class DataAccess {
             return false;
         }
     }
-    
-        public boolean guardarEnBaseDeDatosArticle(Article articleComeFromLogic) {
+
+    public boolean guardarEnBaseDeDatosArticle(Article articleComeFromLogic) {
 
         try {
 
             //Abro conexiones
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbarticles");
             ResultSet rs = sentencia.executeQuery();
-            
+
             while (rs.next()) {
 
                 if (rs.getString("brand").equals(articleComeFromLogic.getBrand()) && rs.getString("description").equals(articleComeFromLogic.getDescription()) && rs.getString("category").equals(articleComeFromLogic.getCategory())) {
@@ -517,15 +498,15 @@ public class DataAccess {
                     rs.close();
                     connectionSQL().close();
                     return false;
-                    
-                } 
+
+                }
             }
 
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
-            
-            createArticle(articleComeFromLogic);  
+
+            createArticle(articleComeFromLogic);
             return true;
 
         } catch (SQLException e) {
@@ -533,20 +514,19 @@ public class DataAccess {
             return false;
         }
     }
-        
-        public boolean updateArticle(Article articleComeFromLogic){
-     
+
+    public boolean updateArticle(Article articleComeFromLogic) {
+
         try {
-            PreparedStatement sentencia=preparedStateent("UPDATE tbarticles SET brand=?,description=?,category=?,quantityAvailable=?,unitPrice=? WHERE id = ?");
-            
+            PreparedStatement sentencia = preparedStateent("UPDATE tbarticles SET brand=?,description=?,category=?,quantityAvailable=?,unitPrice=? WHERE id = ?");
+
             sentencia.setString(1, articleComeFromLogic.getBrand());
             sentencia.setString(2, articleComeFromLogic.getDescription());
             sentencia.setString(3, articleComeFromLogic.getCategory());
             sentencia.setString(4, String.valueOf(articleComeFromLogic.getQuantity()));
             sentencia.setString(5, String.valueOf(articleComeFromLogic.getPrice()));
             sentencia.setString(6, articleComeFromLogic.getId());
-            
-            
+
             sentencia.execute();
             sentencia.close();
             connectionSQL().close();
@@ -556,25 +536,25 @@ public class DataAccess {
             return false;
         }
     }
-        
-        public boolean deleteArticle(Article article){
-        
-        try{
+
+    public boolean deleteArticle(Article article) {
+
+        try {
             //Abro conexiones
-           
+
             // selecr
-            PreparedStatement sentencia=preparedStateent("DELETE FROM tbarticles WHERE id = ?");
+            PreparedStatement sentencia = preparedStateent("DELETE FROM tbarticles WHERE id = ?");
             sentencia.setString(1, article.getId());
-            
+
             sentencia.execute(); //Ejecuta el SQL 
-            
+
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
-            
+
             return true;
-            
-        }catch (Exception e){
+
+        } catch (Exception e) {
             System.out.println(e.toString());
             return false;
         }

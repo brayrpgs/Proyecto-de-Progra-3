@@ -76,7 +76,7 @@ public class Logic {
         }
         return dataResult;
     }
-    
+
     public boolean customerIsRepeat(Customer customer) {
         return new DataAccess().guardarEnBaseDeDatosCustomer(customer);
     }
@@ -93,7 +93,7 @@ public class Logic {
         String[] tag = {"Id", "Marca", "Descricion", "Categoria", "Cantidad Disponible", "Precio Unitario"};
         return tag;
     }
-    
+
     public Object[][] allDataArticles() {
         List<Article> list = new DataAccess().consultarTodosLosRegistrosEnBaseDeDatosArticle();
         Object[][] dataResult = new Object[list.size()][6];
@@ -109,16 +109,24 @@ public class Logic {
         }
         return dataResult;
     }
-    
+
     public boolean ArticleIsRepeat(Article article) {
         return new DataAccess().guardarEnBaseDeDatosArticle(article);
     }
-    
-    public boolean updateArticle(Article article){
+
+    public boolean updateArticle(Article article) {
+        List<Article> list = new DataAccess().consultarTodosLosRegistrosEnBaseDeDatosArticle();
+        for (Article data : list) {
+            if (article.getBrand().equals(data.getBrand())
+                    && article.getDescription().equals(data.getDescription()) 
+                    && article.getBrand().equals(data.getBrand())) {
+                return false;
+            }
+        }
         return new DataAccess().updateArticle(article);
     }
-    
-    public boolean deleteArticle(Article article){
+
+    public boolean deleteArticle(Article article) {
         return new DataAccess().deleteArticle(article);
     }
 }
