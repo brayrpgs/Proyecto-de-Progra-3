@@ -132,7 +132,7 @@ public class Logic {
         for (Article data : list) {
             if (article.getBrand().equals(data.getBrand())
                     && article.getDescription().equals(data.getDescription()) 
-                    && article.getBrand().equals(data.getBrand())) {
+                    && article.getCategory().equals(data.getCategory())) {
                 return false;
             }
         }
