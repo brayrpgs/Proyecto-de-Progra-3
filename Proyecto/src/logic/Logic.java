@@ -8,6 +8,7 @@ import domain.Employee;
 import dataAccess.DataAccess;
 import domain.Article;
 import domain.Customer;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -176,4 +177,27 @@ public class Logic {
     public double total(double desc, double total){
         return total-(total*(desc / 100));
     }
+    
+    //añadir objetos a la canasta 
+    public Object[][] addArticletoCart(ArrayList<Article> list, Article art) {
+        for (Article data : list) {
+            if (data.getId().equals(art.getId())) {
+                data.setQuantity(data.getQuantity() + art.getQuantity());
+            }
+        }
+        list.add(art);
+        Object[][] dataResult = new Object[list.size()][6];
+        int i = 0;
+        for (Article data : list) {
+            dataResult[i][0] = data.getId();
+            dataResult[i][1] = data.getBrand();
+            dataResult[i][2] = data.getDescription();
+            dataResult[i][3] = data.getCategory();
+            dataResult[i][4] = data.getQuantity();
+            dataResult[i][5] = data.getPrice();
+            i++;
+        }
+        return dataResult;
+    }
+    
 }
