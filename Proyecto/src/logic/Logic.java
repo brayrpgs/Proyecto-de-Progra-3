@@ -178,44 +178,58 @@ public class Logic {
 
     //añadir objetos a la canasta 
     public Object[][] addArticletoCart(ArrayList<Article> list, Article art) {
-        
+        //
         Object[][] dataResult = new Object[list.size()][6];
         int i = 0;
-        
+        //ver si esta vacio y guardar
         if (list.isEmpty()) {
-
             list.add(art);
-            
-            
+            for (Article data : list) {
+                dataResult[i][0] = data.getId();
+                dataResult[i][1] = data.getBrand();
+                dataResult[i][2] = data.getDescription();
+                dataResult[i][3] = data.getCategory();
+                dataResult[i][4] = data.getQuantity();
+                dataResult[i][5] = data.getPrice();
+                i++;
+            }
+            return dataResult;
         } else {
-
+            //verificar si esta repetido
+            boolean isRepeat = false;
             for (Article data : list) {
                 if (data.getId().equals(art.getId())) {
-                    
                     data.setQuantity(data.getQuantity() + art.getQuantity());
-
-                } else if(!data.getId().equals(art.getId())){
-                    list.add(art);
-                    
-                    for (Article data : list) {
-                        dataResult[i][0] = data.getId();
-                        dataResult[i][1] = data.getBrand();
-                        dataResult[i][2] = data.getDescription();
-                        dataResult[i][3] = data.getCategory();
-                        dataResult[i][4] = data.getQuantity();
-                        dataResult[i][5] = data.getPrice();
-                        i++;
-                    }
+                    isRepeat = true;
                 }
             }
-            
-            
+            //si esta repetido en la lista
+            if (isRepeat) {
+                for (Article data : list) {
+                    dataResult[i][0] = data.getId();
+                    dataResult[i][1] = data.getBrand();
+                    dataResult[i][2] = data.getDescription();
+                    dataResult[i][3] = data.getCategory();
+                    dataResult[i][4] = data.getQuantity();
+                    dataResult[i][5] = data.getPrice();
+                    i++;
+                }
+                return dataResult;
+            } else {
+                //si no esta repetido enla lista
+                list.add(art);
+                for (Article data : list) {
+                    dataResult[i][0] = data.getId();
+                    dataResult[i][1] = data.getBrand();
+                    dataResult[i][2] = data.getDescription();
+                    dataResult[i][3] = data.getCategory();
+                    dataResult[i][4] = data.getQuantity();
+                    dataResult[i][5] = data.getPrice();
+                    i++;
+                }
+                return dataResult;
+            }
         }
-            
-            
-            return dataResult;
-        }
-        
-       
+    }
     
 }
