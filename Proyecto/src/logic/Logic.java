@@ -54,6 +54,11 @@ public class Logic {
         }
         return dataResult;
     }
+    
+    public List<Employee>  getAllDataEmployee() {
+        return new DataAccess().consultarTodosLosRegistrosEnBaseDeDatos();
+    }
+    
 
     public String[] tagName() {
         String[] tag = {"Id", "Cedula", "Nombre", "Apellidos", "Telefono", "Usuario", "Contraseña"};
@@ -100,6 +105,9 @@ public class Logic {
         return new DataAccess().guardarEnBaseDeDatosCustomer(customer);
     }
 
+    public List<Customer>  getAllDataCustomer() {
+        return new DataAccess().consultarTodosLosRegistrosEnBaseDeDatosCustomer();
+    }
     public boolean updateCustomer(Customer customer) {
         List<Customer> list = new DataAccess().modificarEnBaseDeDatosCustomer(customer);
         for (Customer data : list) {
@@ -137,6 +145,10 @@ public class Logic {
 
     public boolean ArticleIsRepeat(Article article) {
         return new DataAccess().guardarEnBaseDeDatosArticle(article);
+    }
+    
+    public List<Article>  getAllDataArticle() {
+        return new DataAccess().consultarTodosLosRegistrosEnBaseDeDatosArticle();
     }
 
     public boolean updateArticle(Article article) {
