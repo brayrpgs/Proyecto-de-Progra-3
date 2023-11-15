@@ -52,8 +52,9 @@ public class Logic {
     public boolean update(Employee employee) {
         List<Employee> list = new DataAccess().modificarEnBaseDeDatos(employee);
         for (Employee data : list) {
-            if (data.getIdCard().equals(data.getIdCard())
-                    || data.getUserName().equals(data.getIdCard())) {
+            if (data.getIdCard().equals(employee.getIdCard())
+                    || data.getUserName().equals(employee.getUserName())) {
+                
                 return false;
             }
         }
@@ -103,7 +104,7 @@ public class Logic {
     }
 
     public String[] tagNameArticles() {
-        String[] tag = {"Id", "Marca", "Descricion", "Categoria", "Cantidad Disponible", "Precio Unitario"};
+        String[] tag = {"Id", "Marca", "Descripcion", "Categoria", "Cantidad Disponible", "Precio Unitario"};
         return tag;
     }
 
@@ -128,11 +129,14 @@ public class Logic {
     }
 
     public boolean updateArticle(Article article) {
-        List<Article> list = new DataAccess().consultarTodosLosRegistrosEnBaseDeDatosArticle();
+        List<Article> list = new DataAccess().modificarEnBaseDeDatosArticle(article);
+        
         for (Article data : list) {
+                
             if (article.getBrand().equals(data.getBrand())
                     && article.getDescription().equals(data.getDescription()) 
                     && article.getCategory().equals(data.getCategory())) {
+                
                 return false;
             }
         }

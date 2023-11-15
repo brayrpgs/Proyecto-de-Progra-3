@@ -4,6 +4,7 @@
  */
 package presentation;
 
+import domain.Employee;
 import javax.swing.table.DefaultTableModel;
 import logic.Logic;
 
@@ -607,13 +608,14 @@ public class PrincipalGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         InternalSalesForm s = new InternalSalesForm();
+        s.lblEmployeeName.setText(employee.getName() + " " + employee.getLastName());
         jDesktopPane.add(s);
        
         s.show();
         
     }//GEN-LAST:event_mntmAddSaleActionPerformed
                                                                                                
-    
+    public Employee employee;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenuBar jMenuBar1;

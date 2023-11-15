@@ -437,9 +437,9 @@ public class DataAccess {
 
         List<Article> articleList = new ArrayList<>();
         try {
-
+       
             //Abro conexiones
-            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbarticle WHERE id <> " + articleComeFromLogic.getId());
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbarticles WHERE id <> " + articleComeFromLogic.getId());
             ResultSet rs = sentencia.executeQuery();
 
             while (rs.next()) {

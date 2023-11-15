@@ -374,9 +374,9 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
                 return;
             } 
             
-            article.setBrand(txt1.getText());
-            article.setDescription(txt2.getText());
-            article.setCategory(txt3.getText());
+            article.setBrand(txt1.getText().toUpperCase());
+            article.setDescription(txt2.getText().toUpperCase());
+            article.setCategory(txt3.getText().toUpperCase());
             article.setQuantity(Integer.parseInt(txt4.getText()));
             article.setPrice(Double.parseDouble(txt5.getText()));
             article.setId(txt6.getText());
