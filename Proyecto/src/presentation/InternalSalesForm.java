@@ -5,7 +5,10 @@
 package presentation;
 
 import domain.Article;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logic.Logic;
 
@@ -26,6 +29,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
 
     public void initialize(){
     
+        articleList = new ArrayList<>();
         Object[] clients = new Logic().getAllDataCustomer().toArray();
         cbClient.setModel(new DefaultComboBoxModel<Object>(clients));
         jTable2.setModel(new DefaultTableModel(new Logic().allDataArticles(), new Logic().tagNameArticles()));
@@ -47,7 +51,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtBrand = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAddToCard = new javax.swing.JButton();
         lblEmployeeName = new javax.swing.JLabel();
         lblBrand = new javax.swing.JLabel();
         lblDescription = new javax.swing.JLabel();
@@ -87,13 +91,13 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         jLabel2.setText("Vendedor");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 6, -1, -1));
 
-        jButton1.setText("Agregar a la canasta");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddToCard.setText("Agregar a la canasta");
+        btnAddToCard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddToCardActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 133, -1, -1));
+        getContentPane().add(btnAddToCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 133, -1, -1));
 
         lblEmployeeName.setText("nombre o ced");
         getContentPane().add(lblEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(449, 6, -1, -1));
@@ -146,7 +150,6 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         lblDiscount.setText("Descuento");
         getContentPane().add(lblDiscount, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 86, -1, -1));
 
-        txtDiscount.setEditable(false);
         txtDiscount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDiscountKeyTyped(evt);
@@ -157,21 +160,36 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         lblDiscount1.setText("SubTotal");
         getContentPane().add(lblDiscount1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, -1, -1));
 
-        lblDiscount2.setText("Precio a pagar");
+        lblDiscount2.setText("0");
         getContentPane().add(lblDiscount2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 86, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Marca", "Descripcion", "Categoria", "Cantidad", "Precio"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 166, 400, -1));
 
@@ -211,12 +229,27 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_txtQuantityKeyTyped
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddToCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCardActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        if(txtQuantity.getText().isEmpty() || (Integer.parseInt(txtQuantity.getText()) > Integer.parseInt(txtDisponibility.getText()))){
+        
+            showMessage("No se pudo agregar a la canasta.", "Error al agregar en la canasta", JOptionPane.ERROR_MESSAGE);
+            
+        }
+       
+        article.setQuantity(Integer.parseInt(txtQuantity.getText()));
+        System.out.println(article.toString());
+        
+    }//GEN-LAST:event_btnAddToCardActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int discount = 0;
+        
+        if(!txtDiscount.getText().isBlank()){
+               discount = Integer.parseInt(txtDiscount.getText());        
+        } 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtDiscountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiscountKeyTyped
@@ -251,13 +284,25 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
             txtPrice.setText(price);
             
             article.setId(id);
+            article.setBrand(brand.toUpperCase());
+            article.setCategory(category.toUpperCase());
+            article.setDescription(description.toUpperCase());
+            article.setPrice(Double.parseDouble(price));
+            
         
     }//GEN-LAST:event_jTable2MouseClicked
 
+    //Metodo para imprimir
+    public void showMessage(String message, String title, int messageType) {
+        JOptionPane.showMessageDialog(null, message, title, messageType);
+    }
+    
+    
     private Article article;
+    private ArrayList<Article> articleList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddToCard;
     private javax.swing.JComboBox<Object> cbClient;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
