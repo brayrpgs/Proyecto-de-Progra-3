@@ -23,7 +23,7 @@ public class Logic {
     public boolean isEmployee(Employee employee) {
         return new DataAccess().login(employee);
     }
-    
+
     public Employee getEmployee(Employee employee) {
         List<Employee> list = new DataAccess().consultarTodosLosRegistrosEnBaseDeDatos();
         for (Employee data : list) {
@@ -55,11 +55,10 @@ public class Logic {
         }
         return dataResult;
     }
-    
-    public List<Employee>  getAllDataEmployee() {
+
+    public List<Employee> getAllDataEmployee() {
         return new DataAccess().consultarTodosLosRegistrosEnBaseDeDatos();
     }
-    
 
     public String[] tagName() {
         String[] tag = {"Id", "Cedula", "Nombre", "Apellidos", "Telefono", "Usuario", "Contraseña"};
@@ -71,7 +70,7 @@ public class Logic {
         for (Employee data : list) {
             if (data.getIdCard().equals(employee.getIdCard())
                     || data.getUserName().equals(employee.getUserName())) {
-                
+
                 return false;
             }
         }
@@ -109,7 +108,7 @@ public class Logic {
     public List<Customer> getAllDataCustomer() {
         return new DataAccess().consultarTodosLosRegistrosEnBaseDeDatosCustomer();
     }
-    
+
     public boolean updateCustomer(Customer customer) {
         List<Customer> list = new DataAccess().modificarEnBaseDeDatosCustomer(customer);
         for (Customer data : list) {
@@ -148,20 +147,20 @@ public class Logic {
     public boolean ArticleIsRepeat(Article article) {
         return new DataAccess().guardarEnBaseDeDatosArticle(article);
     }
-    
-    public List<Article>  getAllDataArticle() {
+
+    public List<Article> getAllDataArticle() {
         return new DataAccess().consultarTodosLosRegistrosEnBaseDeDatosArticle();
     }
 
     public boolean updateArticle(Article article) {
         List<Article> list = new DataAccess().modificarEnBaseDeDatosArticle(article);
-        
+
         for (Article data : list) {
-                
+
             if (article.getBrand().equals(data.getBrand())
-                    && article.getDescription().equals(data.getDescription()) 
+                    && article.getDescription().equals(data.getDescription())
                     && article.getCategory().equals(data.getCategory())) {
-                
+
                 return false;
             }
         }
@@ -171,33 +170,52 @@ public class Logic {
     public boolean deleteArticle(Article article) {
         return new DataAccess().deleteArticle(article);
     }
-    
-    
+
     //metodo de calculo de total
-    public double total(double desc, double total){
-        return total-(total*(desc / 100));
+    public double total(double desc, double total) {
+        return total - (total * (desc / 100));
     }
-    
+
     //añadir objetos a la canasta 
     public Object[][] addArticletoCart(ArrayList<Article> list, Article art) {
-        for (Article data : list) {
-            if (data.getId().equals(art.getId())) {
-                data.setQuantity(data.getQuantity() + art.getQuantity());
-            }
-        }
-        list.add(art);
+        
         Object[][] dataResult = new Object[list.size()][6];
         int i = 0;
-        for (Article data : list) {
-            dataResult[i][0] = data.getId();
-            dataResult[i][1] = data.getBrand();
-            dataResult[i][2] = data.getDescription();
-            dataResult[i][3] = data.getCategory();
-            dataResult[i][4] = data.getQuantity();
-            dataResult[i][5] = data.getPrice();
-            i++;
+        
+        if (list.isEmpty()) {
+
+            list.add(art);
+            
+            
+        } else {
+
+            for (Article data : list) {
+                if (data.getId().equals(art.getId())) {
+                    
+                    data.setQuantity(data.getQuantity() + art.getQuantity());
+
+                } else if(!data.getId().equals(art.getId())){
+                    list.add(art);
+                    
+                    for (Article data : list) {
+                        dataResult[i][0] = data.getId();
+                        dataResult[i][1] = data.getBrand();
+                        dataResult[i][2] = data.getDescription();
+                        dataResult[i][3] = data.getCategory();
+                        dataResult[i][4] = data.getQuantity();
+                        dataResult[i][5] = data.getPrice();
+                        i++;
+                    }
+                }
+            }
+            
+            
         }
-        return dataResult;
-    }
+            
+            
+            return dataResult;
+        }
+        
+       
     
 }

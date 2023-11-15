@@ -34,6 +34,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         cbClient.setModel(new DefaultComboBoxModel<Object>(clients));
         jTable2.setModel(new DefaultTableModel(new Logic().allDataArticles(), new Logic().tagNameArticles()));
         jTable2.removeColumn(jTable2.getColumn("Id"));
+        
     
     }
     
@@ -165,17 +166,17 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Marca", "Descripcion", "Categoria", "Cantidad", "Precio"
+                "Id", "Marca", "Descripcion", "Categoria", "Cantidad", "Precio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -189,6 +190,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
         }
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 166, 400, -1));
@@ -236,11 +238,22 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         
             showMessage("No se pudo agregar a la canasta.", "Error al agregar en la canasta", JOptionPane.ERROR_MESSAGE);
             
-        }
-       
-        article.setQuantity(Integer.parseInt(txtQuantity.getText()));
-        System.out.println(article.toString());
+        } else {
+            
+        try{
+            article.setQuantity(Integer.parseInt(txtQuantity.getText()));
+        } catch(Exception e){}
         
+            Object[] aux = {"Id","Marca","Descripcion","Categoria","Cantidad","Precio"}; 
+            Object[][] temp = new Logic().addArticletoCart(articleList, article);
+            jTable1.setModel(new DefaultTableModel(temp, aux));
+            
+            for (Article data: articleList){
+                
+                System.out.println(data.toString());
+                
+            }
+        }
     }//GEN-LAST:event_btnAddToCardActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
