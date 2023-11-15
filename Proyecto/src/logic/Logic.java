@@ -22,6 +22,17 @@ public class Logic {
     public boolean isEmployee(Employee employee) {
         return new DataAccess().login(employee);
     }
+    
+    public Employee getEmployee(Employee employee) {
+        List<Employee> list = new DataAccess().consultarTodosLosRegistrosEnBaseDeDatos();
+        for (Employee data : list) {
+            if (data.getPassword().equals(employee.getPassword())
+                    && data.getUserName().equals(employee.getUserName())) {
+                return data;
+            }
+        }
+        return null;
+    }
 
     public boolean isRepeat(Employee employee) {
         return new DataAccess().guardarEnBaseDeDatos(employee);
