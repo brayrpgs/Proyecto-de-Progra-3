@@ -4,6 +4,8 @@
  */
 package domain;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author BrayRPGs
@@ -14,18 +16,28 @@ public class Sale {
     private Customer customer;
     private double subTotal;
     private double descount;
+    private ArrayList<Article> articles;
     private double total;
 
-    public Sale() {
-    }
-
-    public Sale(String id,Employee employee, Customer customer, double subTotal, double descount, double total) {
+    public Sale(String id, Employee employee, Customer customer, double subTotal, double descount, ArrayList<Article> articles, double total) {
         this.id = id;
         this.employee = employee;
         this.customer = customer;
         this.subTotal = subTotal;
         this.descount = descount;
+        this.articles = articles;
         this.total = total;
+    }
+
+    public Sale() {
+    }
+
+    public ArrayList<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(ArrayList<Article> articles) {
+        this.articles = articles;
     }
 
     public Employee getEmployee() {
@@ -66,6 +78,14 @@ public class Sale {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

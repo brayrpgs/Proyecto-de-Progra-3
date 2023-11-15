@@ -170,4 +170,10 @@ public class Logic {
     public boolean deleteArticle(Article article) {
         return new DataAccess().deleteArticle(article);
     }
+    
+    
+    //metodo de calculo de total
+    public double total(double desc, double total){
+        return total-(total*(desc / 100));
+    }
 }
