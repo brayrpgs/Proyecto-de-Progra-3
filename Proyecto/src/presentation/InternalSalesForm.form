@@ -34,7 +34,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="lblClient" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="jbClient" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="cbClient" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="lblDiscount" min="-2" max="-2" attributes="0"/>
@@ -127,7 +127,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblClient" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jbClient" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbClient" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -193,7 +193,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JComboBox" name="jbClient">
+    <Component class="javax.swing.JComboBox" name="cbClient">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">

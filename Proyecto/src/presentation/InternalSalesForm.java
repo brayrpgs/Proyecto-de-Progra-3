@@ -4,6 +4,8 @@
  */
 package presentation;
 
+import logic.Logic;
+
 /**
  *
  * @author kenda
@@ -15,8 +17,17 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
      */
     public InternalSalesForm() {
         initComponents();
+        
+        refresh();
     }
 
+    public void refresh(){
+    
+        //Object[] clients = new Logic().allDataCustomer().
+        //cbClient.setModel(new DefaultModel());
+    
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,7 +37,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jbClient = new javax.swing.JComboBox<>();
+        cbClient = new javax.swing.JComboBox<>();
         lblClient = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtBrand = new javax.swing.JTextField();
@@ -57,7 +68,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Agregar venta");
 
-        jbClient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbClient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblClient.setText("Cliente");
 
@@ -161,7 +172,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(lblClient)
                                     .addGap(26, 26, 26)
-                                    .addComponent(jbClient, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbClient, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(lblDiscount)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -228,7 +239,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblClient)
-                            .addComponent(jbClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -314,6 +325,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbClient;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
@@ -322,7 +334,6 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JComboBox<String> jbClient;
     private javax.swing.JLabel lblBrand;
     private javax.swing.JLabel lblCategory;
     private javax.swing.JLabel lblClient;

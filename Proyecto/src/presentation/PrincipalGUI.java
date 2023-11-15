@@ -608,7 +608,9 @@ public class PrincipalGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         InternalSalesForm s = new InternalSalesForm();
+        
         s.lblEmployeeName.setText(employee.getName() + " " + employee.getLastName());
+                
         jDesktopPane.add(s);
        
         s.show();

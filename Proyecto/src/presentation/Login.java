@@ -142,7 +142,7 @@ public class Login extends javax.swing.JFrame {
             if (new Logic().isEmployee(employee)) {
                 dispose();
                 PrincipalGUI pGUI = new PrincipalGUI();
-                pGUI.employee = employee;
+                pGUI.employee = new Logic().getEmployee(employee);
             } else {
 
                 showMessage("Los datos estan incorrectos o incompletos", "Error al iniciar sesion", JOptionPane.WARNING_MESSAGE);
