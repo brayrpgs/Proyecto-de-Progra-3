@@ -178,12 +178,12 @@ public class Logic {
 
     //añadir objetos a la canasta 
     public Object[][] addArticletoCart(ArrayList<Article> list, Article art) {
-        //
-        Object[][] dataResult = new Object[list.size()][6];
         int i = 0;
         //ver si esta vacio y guardar
         if (list.isEmpty()) {
             list.add(art);
+            //
+            Object[][] dataResult = new Object[list.size()][6];
             for (Article data : list) {
                 dataResult[i][0] = data.getId();
                 dataResult[i][1] = data.getBrand();
@@ -205,6 +205,8 @@ public class Logic {
             }
             //si esta repetido en la lista
             if (isRepeat) {
+                //
+                Object[][] dataResult = new Object[list.size()][6];
                 for (Article data : list) {
                     dataResult[i][0] = data.getId();
                     dataResult[i][1] = data.getBrand();
@@ -218,6 +220,8 @@ public class Logic {
             } else {
                 //si no esta repetido enla lista
                 list.add(art);//lo agrega sin sumar porque aun no estaba en la lista
+                //
+                Object[][] dataResult = new Object[list.size()][6];
                 for (Article data : list) {
                     dataResult[i][0] = data.getId();
                     dataResult[i][1] = data.getBrand();
@@ -231,5 +235,5 @@ public class Logic {
             }
         }
     }
-    
+
 }
