@@ -239,6 +239,7 @@ public class DataAccess {
 
     public List<Customer> consultarTodosLosRegistrosEnBaseDeDatosCustomer() {
         List<Customer> laListaDeRegistrosADevolver = new ArrayList<>();
+        
         try {
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbcustomer");
             ResultSet rs = sentencia.executeQuery();

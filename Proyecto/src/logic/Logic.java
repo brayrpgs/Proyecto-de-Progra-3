@@ -105,9 +105,10 @@ public class Logic {
         return new DataAccess().guardarEnBaseDeDatosCustomer(customer);
     }
 
-    public List<Customer>  getAllDataCustomer() {
+    public List<Customer> getAllDataCustomer() {
         return new DataAccess().consultarTodosLosRegistrosEnBaseDeDatosCustomer();
     }
+    
     public boolean updateCustomer(Customer customer) {
         List<Customer> list = new DataAccess().modificarEnBaseDeDatosCustomer(customer);
         for (Customer data : list) {

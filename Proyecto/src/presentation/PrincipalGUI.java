@@ -65,11 +65,11 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jDesktopPane.setLayout(jDesktopPaneLayout);
         jDesktopPaneLayout.setHorizontalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1081, Short.MAX_VALUE)
+            .addGap(0, 1192, Short.MAX_VALUE)
         );
         jDesktopPaneLayout.setVerticalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 668, Short.MAX_VALUE)
+            .addGap(0, 687, Short.MAX_VALUE)
         );
 
         jmEmployee.setText("Vendedores");
