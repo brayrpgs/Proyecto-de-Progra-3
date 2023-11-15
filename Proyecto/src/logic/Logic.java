@@ -217,7 +217,7 @@ public class Logic {
                 return dataResult;
             } else {
                 //si no esta repetido enla lista
-                list.add(art);
+                list.add(art);//lo agrega sin sumar porque aun no estaba en la lista
                 for (Article data : list) {
                     dataResult[i][0] = data.getId();
                     dataResult[i][1] = data.getBrand();
