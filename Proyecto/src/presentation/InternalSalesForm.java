@@ -242,17 +242,29 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
             
         try{
             article.setQuantity(Integer.parseInt(txtQuantity.getText()));
+            
         } catch(Exception e){}
         
             Object[] aux = {"Id","Marca","Descripcion","Categoria","Cantidad","Precio"}; 
             Object[][] temp = new Logic().addArticletoCart(articleList, article);
+            
+            System.out.println(txtQuantity.getText());
+           
+            for(Article data: articleList){
+            
+                if(data.getId().equals(article.getId())){
+                
+                    //System.out.println(data.getQuantity() + " + " + article.getQuantity());
+                    if(data.getQuantity() + article.getQuantity() > Integer.parseInt(txtDisponibility.getText())){
+                        System.out.println("sobrepasa");
+                    }
+                    
+                }
+            
+            }
+            
             jTable1.setModel(new DefaultTableModel(temp, aux));
             
-            for (Article data: articleList){
-                
-                System.out.println(data.toString());
-                
-            }
         }
     }//GEN-LAST:event_btnAddToCardActionPerformed
 
