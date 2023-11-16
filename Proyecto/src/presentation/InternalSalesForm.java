@@ -251,6 +251,10 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
                 
                 Object[][] temp = new Logic().addArticletoCart(articleList, article);
                 jTable1.setModel(new DefaultTableModel(temp, aux));
+                
+                for(Article data:articleList){
+                    System.out.println(data.toString());
+                }
                               
             } else {
                 
