@@ -234,7 +234,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
     private void btnAddToCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCardActionPerformed
         // TODO add your handling code here:
         
-        if(txtQuantity.getText().isEmpty() || (Integer.parseInt(txtQuantity.getText()) > Integer.parseInt(txtDisponibility.getText()))){
+        if(txtQuantity.getText().isEmpty() || txtBrand.getText().isEmpty() || (Integer.parseInt(txtQuantity.getText()) > Integer.parseInt(txtDisponibility.getText()))){
         
             showMessage("No se pudo agregar a la canasta.", "Error al agregar en la canasta", JOptionPane.ERROR_MESSAGE);
             
@@ -246,25 +246,18 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         } catch(Exception e){}
         
             Object[] aux = {"Id","Marca","Descripcion","Categoria","Cantidad","Precio"}; 
-            Object[][] temp = new Logic().addArticletoCart(articleList, article);
-            
-            System.out.println(txtQuantity.getText());
-           
-            for(Article data: articleList){
-            
-                if(data.getId().equals(article.getId())){
+                       
+            if(new Logic().verifyArticle(articleList, article, Integer.parseInt(txtQuantity.getText()), Integer.parseInt(txtDisponibility.getText()))){
                 
-                    //System.out.println(data.getQuantity() + " + " + article.getQuantity());
-                    if(data.getQuantity() + article.getQuantity() > Integer.parseInt(txtDisponibility.getText())){
-                        System.out.println("sobrepasa");
-                    }
-                    
-                }
+                Object[][] temp = new Logic().addArticletoCart(articleList, article);
+                jTable1.setModel(new DefaultTableModel(temp, aux));
+                              
+            } else {
+                
+                showMessage("La cantidad solicitada sobrepasa la cantidad disponible", "Error al agregar al carrito", JOptionPane.ERROR_MESSAGE);
             
             }
-            
-            jTable1.setModel(new DefaultTableModel(temp, aux));
-            
+  
         }
     }//GEN-LAST:event_btnAddToCardActionPerformed
 

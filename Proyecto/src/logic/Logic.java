@@ -194,6 +194,7 @@ public class Logic {
                 i++;
             }
             return dataResult;
+            
         } else {
             //verificar si esta repetido
             boolean isRepeat = false;
@@ -237,16 +238,17 @@ public class Logic {
     }
 
     //verificar si se exede la cantidad de articulos que pretende comprar
-    public boolean verifyArticle(ArrayList<Article> list, Article art, int cant) {
+    public boolean verifyArticle(ArrayList<Article> list, Article art, int cant, int lim) {
         //verifica si esta vacia la lista 
         if (list.isEmpty()) {
-            if (cant > art.getQuantity()) {
+            if (cant > lim) {
                 return false;
             }
         } else {
             for (Article data : list) {//recorro cada articulo en busca del id
                 if (data.getId().equals(art.getId())) {//verifico que es el mismo id
-                    if (cant + data.getQuantity() > art.getQuantity()) {//verifico que no soble pase el limite
+                    
+                    if (cant + data.getQuantity() > lim) {//verifico que no soble pase el limite
                         return false;
                     }
                 }
