@@ -4,7 +4,6 @@
  */
 package domain;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -16,28 +15,38 @@ public class Sale {
     private Customer customer;
     private double subTotal;
     private double descount;
-    private ArrayList<Article> articles;
+    private int countArticles;
     private double total;
 
-    public Sale(String id, Employee employee, Customer customer, double subTotal, double descount, ArrayList<Article> articles, double total) {
+    public Sale() {
+    }
+
+    public Sale(String id, Employee employee, Customer customer, double subTotal, double descount, int countArticles, double total) {
         this.id = id;
         this.employee = employee;
         this.customer = customer;
         this.subTotal = subTotal;
         this.descount = descount;
-        this.articles = articles;
+        this.countArticles = countArticles;
         this.total = total;
     }
 
-    public Sale() {
+    public int getCountArticles() {
+        return countArticles;
     }
 
-    public ArrayList<Article> getArticles() {
-        return articles;
+    public void setCountArticles(int countArticles) {
+        this.countArticles = countArticles;
     }
 
-    public void setArticles(ArrayList<Article> articles) {
-        this.articles = articles;
+   
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Employee getEmployee() {
@@ -80,17 +89,11 @@ public class Sale {
         this.total = total;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
-        return "Sale{" + "employee=" + employee + ", customer=" + customer + ", subTotal=" + subTotal + ", descount=" + descount + ", total=" + total + '}';
+        return "Sale{" + "id=" + id + ", employee=" + employee + ", customer=" + customer + ", subTotal=" + subTotal + ", descount=" + descount + ", total=" + total + '}';
     }
+
+    
     
 }

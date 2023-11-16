@@ -8,6 +8,7 @@ import domain.Employee;
 import dataAccess.DataAccess;
 import domain.Article;
 import domain.Customer;
+import domain.Sale;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -256,5 +257,10 @@ public class Logic {
 
         }
         return true;//sale si paso todo
+    }
+    
+    //para guardar el reporte de la venta
+    public boolean setSale(Sale sale){
+        return false;//falta lo de ceasar
     }
 }
