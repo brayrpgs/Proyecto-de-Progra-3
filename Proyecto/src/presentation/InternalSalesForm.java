@@ -315,7 +315,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
             sale.setCustomer(customerAux);
             sale.setDescount(discount);
             sale.setEmployee(employee);
-            sale.setSubTotal(Double.parseDouble(lblPrice.getText()));
+            sale.setSubTotal(Double.parseDouble(lblSubPrice.getText()));
             sale.setTotal(total);
             
             if(new Logic().setSale(sale)){

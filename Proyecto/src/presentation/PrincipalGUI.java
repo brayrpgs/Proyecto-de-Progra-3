@@ -191,12 +191,27 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jmSales.add(mntmAddSale);
 
         mntmReadSale.setText("Consultar ventas");
+        mntmReadSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmReadSaleActionPerformed(evt);
+            }
+        });
         jmSales.add(mntmReadSale);
 
         mntmUpdateSale.setText("Modificar ventas");
+        mntmUpdateSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmUpdateSaleActionPerformed(evt);
+            }
+        });
         jmSales.add(mntmUpdateSale);
 
         mntmDeleteSale.setText("Eliminar ventas");
+        mntmDeleteSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmDeleteSaleActionPerformed(evt);
+            }
+        });
         jmSales.add(mntmDeleteSale);
 
         jMenuBar1.add(jmSales);
@@ -617,6 +632,79 @@ public class PrincipalGUI extends javax.swing.JFrame {
         s.show();
         
     }//GEN-LAST:event_mntmAddSaleActionPerformed
+
+    private void mntmReadSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmReadSaleActionPerformed
+        // TODO add your handling code here:
+        
+        CRUDInternalForm c = new CRUDInternalForm();
+        jDesktopPane.add(c);
+        c.setTitle("Mostrar ventas");
+        
+        //Apagando labels
+        c.jLabel1.setVisible(false);
+        c.jLabel2.setVisible(false);
+        c.jLabel3.setVisible(false);
+        c.jLabel4.setVisible(false);
+        c.jLabel5.setVisible(false);
+        c.jLabel6.setVisible(false);
+        
+        //Apagando txt
+        c.txt1.setVisible(false);
+        c.txt2.setVisible(false);
+        c.txt3.setVisible(false);
+        c.txt4.setVisible(false);
+        c.txt5.setVisible(false);
+        c.txt6.setVisible(false);
+                
+        //Apagando los botones
+        c.btn2.setVisible(false);       
+        c.btn1.setVisible(false);
+                 
+        //Datos en la tabla
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allDataSales(),new Logic().tagNameSale())); 
+        c.jTable1.removeColumn(c.jTable1.getColumn("Id"));
+        
+        c.show();
+        
+        
+    }//GEN-LAST:event_mntmReadSaleActionPerformed
+
+    private void mntmUpdateSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmUpdateSaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mntmUpdateSaleActionPerformed
+
+    private void mntmDeleteSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmDeleteSaleActionPerformed
+        // TODO add your handling code here:
+        
+        CRUDInternalForm c = new CRUDInternalForm();
+        jDesktopPane.add(c);
+        c.setTitle("Eliminar ventas");
+        
+        //Agregando labels
+        c.jLabel1.setText("Vendedor");
+        c.jLabel2.setText("Cliente");
+        c.jLabel3.setText("SubTotal");
+        c.jLabel4.setText("Desuento");
+        c.jLabel5.setText("Articulos");
+        c.jLabel6.setText("Total");
+                
+        c.txt1.setEditable(false);
+        c.txt2.setEditable(false);
+        c.txt3.setEditable(false);
+        c.txt4.setEditable(false);
+        c.txt5.setEditable(false);
+        c.txt6.setEditable(false);      
+        
+        //Agregando los botones      
+        c.btn2.setVisible(false);
+        c.btn1.setText("Eliminar venta");
+           
+        //Cargar datos en la tabla
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allDataSales(),new Logic().tagNameSale())); 
+        
+        c.show();
+        
+    }//GEN-LAST:event_mntmDeleteSaleActionPerformed
                                                                                                
     public Employee employee;
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -144,6 +144,28 @@ public class Logic {
         }
         return dataResult;
     }
+    
+    public String[] tagNameSale() {
+        String[] tag = {"Id", "Vendedor", "Cliente", "SubTotal", "Descuento", "Articulos", "Total"};
+        return tag;
+    }
+
+    public Object[][] allDataSales() {
+        List<Sale> list = new DataAccess().consultarTodosLosRegistrosEnBaseDeDatosSales();
+        Object[][] dataResult = new Object[list.size()][7];
+        int i = 0;
+        for (Sale data : list) {
+            dataResult[i][0] = data.getId();
+            dataResult[i][1] = data.getEmployee().getName() + " " + data.getEmployee().getLastName();
+            dataResult[i][2] = data.getCustomer().getName();
+            dataResult[i][3] = data.getSubTotal();
+             dataResult[i][4] = data.getDescount();
+            dataResult[i][5] = data.getCountArticles();
+            dataResult[i][6] = data.getTotal();
+            i++;
+        }
+        return dataResult;
+    }
 
     public boolean ArticleIsRepeat(Article article) {
         return new DataAccess().guardarEnBaseDeDatosArticle(article);
@@ -170,6 +192,10 @@ public class Logic {
 
     public boolean deleteArticle(Article article) {
         return new DataAccess().deleteArticle(article);
+    }
+    
+    public boolean deleteSale(Sale sale) {
+        return new DataAccess().deleteSale(sale);
     }
 
     //metodo de calculo de total

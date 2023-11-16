@@ -268,6 +268,53 @@ public class DataAccess {
             return laListaDeRegistrosADevolver;
         }
     }
+    
+    public List<Sale> consultarTodosLosRegistrosEnBaseDeDatosSales() {
+        List<Sale> laListaDeRegistrosADevolver = new ArrayList<>();
+        
+        try {
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbsales");
+            ResultSet rs = sentencia.executeQuery();
+
+            while (rs.next()) { //¿Existen registros?
+                //Seteo una venta
+                String[] aux = rs.getString("employee").split(" ");
+                Employee employeeAux =  new Employee();
+                employeeAux.setName(aux[0]);
+                employeeAux.setLastName(aux[1]);
+                Customer customer = new Customer();
+                customer.setName(rs.getString("customer"));
+                
+                Sale sale = new Sale();
+                sale.setId(rs.getString("id"));
+                sale.setEmployee(employeeAux);
+                sale.setCustomer(customer);
+                sale.setSubTotal(Double.parseDouble(rs.getString("subTotal")));
+                sale.setDescount(Double.parseDouble(rs.getString("discount")));
+                sale.setCountArticles(Integer.parseInt(rs.getString("CountArticles")));
+                sale.setTotal(Double.parseDouble(rs.getString("total")));
+
+                //Agrego la venta a la lista
+                laListaDeRegistrosADevolver.add(sale);
+            }
+
+            for(Sale data: laListaDeRegistrosADevolver){
+                
+                data.toString();
+                
+            }
+            
+            
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+            return laListaDeRegistrosADevolver;
+        } catch (SQLException e) {
+            System.out.println(e);
+            laListaDeRegistrosADevolver = null;
+            return laListaDeRegistrosADevolver;
+        }
+    }
 
     public List<Customer> modificarEnBaseDeDatosCustomer(Customer customerComeFromLogic) {
 
@@ -599,6 +646,29 @@ public class DataAccess {
             return true;
 
         } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+    
+    public boolean deleteSale(Sale sale) {
+
+        try {
+            //Abro conexiones
+
+            // selecr
+            PreparedStatement sentencia = preparedStateent("DELETE FROM tbsales WHERE id = ?");
+            sentencia.setString(1, sale.getId());
+
+            sentencia.execute(); //Ejecuta el SQL 
+
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+
+            return true;
+
+        } catch (Exception e) {
             System.out.println(e.toString());
             return false;
         }
