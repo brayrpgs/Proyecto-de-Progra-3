@@ -27,7 +27,6 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
     public InternalSalesForm() {
         
         initComponents();
-        lblEmployeeName.setText(employee.getName() + " " + employee.getLastName());
         initialize();
     }
 

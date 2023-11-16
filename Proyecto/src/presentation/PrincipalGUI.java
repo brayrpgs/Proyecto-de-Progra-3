@@ -610,6 +610,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         InternalSalesForm s = new InternalSalesForm();
         
         s.setEmployee(employee);
+        s.lblEmployeeName.setText(employee.getName() + " " + employee.getLastName());
                 
         jDesktopPane.add(s);
        
