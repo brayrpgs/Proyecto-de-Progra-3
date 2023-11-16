@@ -5,6 +5,9 @@
 package presentation;
 
 import domain.Article;
+import domain.Customer;
+import domain.Employee;
+import domain.Sale;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -22,8 +25,9 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
      * Creates new form InternalSalesForm
      */
     public InternalSalesForm() {
-        initComponents();
         
+        initComponents();
+        lblEmployeeName.setText(employee.getName() + " " + employee.getLastName());
         initialize();
     }
 
@@ -65,7 +69,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         txtDisponibility = new javax.swing.JTextField();
         lblQuantity = new javax.swing.JLabel();
         txtQuantity = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnSale = new javax.swing.JButton();
         lblDiscount = new javax.swing.JLabel();
         txtDiscount = new javax.swing.JTextField();
         lblSubtotal = new javax.swing.JLabel();
@@ -140,13 +144,13 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         });
         getContentPane().add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, 104, -1));
 
-        jButton2.setText("Realizar venta");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSale.setText("Realizar venta");
+        btnSale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSaleActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 133, 137, -1));
+        getContentPane().add(btnSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 133, 137, -1));
 
         lblDiscount.setText("Descuento");
         getContentPane().add(lblDiscount, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 86, -1, -1));
@@ -260,9 +264,9 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
                     subTotal += data.getQuantity() * data.getPrice();
                     
                 }
-                
+        
                 lblSubPrice.setText(String.valueOf(subTotal));
-                
+
                 cleanForm();
                               
             } else {
@@ -274,14 +278,60 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAddToCardActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaleActionPerformed
         // TODO add your handling code here:
-        int discount = 0;
         
-        if(!txtDiscount.getText().isBlank()){
-               discount = Integer.parseInt(txtDiscount.getText());        
-        } 
-    }//GEN-LAST:event_jButton2ActionPerformed
+        Double discount = 0.0;
+        Double total = 0.0;
+        int articleQuantity = 0;
+        Sale sale = new Sale();
+        
+        if (articleList.isEmpty()) {
+            
+            showMessage("No se pudo agregar la venta.", "Error al agregar la venta", JOptionPane.ERROR_MESSAGE);
+                        
+        } else {
+
+            if (txtDiscount.getText().isBlank()) {
+
+                discount = 0.0;
+                total = new Logic().total(discount, Double.parseDouble(lblSubPrice.getText()));
+
+            } else {
+
+                total = new Logic().total(Integer.parseInt(txtDiscount.getText()), Double.parseDouble(lblSubPrice.getText()));
+                discount = Double.parseDouble(lblSubPrice.getText()) - total;
+
+            }
+
+            for (Article data : articleList) {
+
+                articleQuantity += data.getQuantity();
+
+            }
+            
+            Customer customerAux = (Customer) cbClient.getSelectedItem();
+                        
+            sale.setCountArticles(articleQuantity);           
+            sale.setCustomer(customerAux);
+            sale.setDescount(discount);
+            sale.setEmployee(employee);
+            sale.setSubTotal(Double.parseDouble(lblPrice.getText()));
+            sale.setTotal(total);
+            
+            if(new Logic().setSale(sale)){
+            
+                showMessage("Comprar realizada con exito.", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+            
+            } else {
+            
+                showMessage("No se pudo agregar la venta.", "Error al agregar la venta", JOptionPane.ERROR_MESSAGE);
+            
+            }
+        }
+        
+        
+    }//GEN-LAST:event_btnSaleActionPerformed
 
     private void txtDiscountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiscountKeyTyped
         // TODO add your handling code here:
@@ -348,13 +398,22 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         
         
     }
-    
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+        
     private Article article;
+    private Employee employee;
     private ArrayList<Article> articleList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddToCard;
+    private javax.swing.JButton btnSale;
     private javax.swing.JComboBox<Object> cbClient;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -609,7 +609,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         
         InternalSalesForm s = new InternalSalesForm();
         
-        s.lblEmployeeName.setText(employee.getName() + " " + employee.getLastName());
+        s.setEmployee(employee);
                 
         jDesktopPane.add(s);
        
