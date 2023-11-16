@@ -261,6 +261,6 @@ public class Logic {
     
     //para guardar el reporte de la venta
     public boolean setSale(Sale sale){
-        return false;//falta lo de ceasar
+        return new DataAccess().createSale(sale);
     }
 }
