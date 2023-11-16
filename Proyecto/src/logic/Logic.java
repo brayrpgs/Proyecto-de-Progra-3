@@ -236,4 +236,23 @@ public class Logic {
         }
     }
 
+    //verificar si se exede la cantidad de articulos que pretende comprar
+    public boolean verifyArticle(ArrayList<Article> list, Article art, int cant) {
+        //verifica si esta vacia la lista 
+        if (list.isEmpty()) {
+            if (cant > art.getQuantity()) {
+                return false;
+            }
+        } else {
+            for (Article data : list) {//recorro cada articulo en busca del id
+                if (data.getId().equals(art.getId())) {//verifico que es el mismo id
+                    if (cant + data.getQuantity() > art.getQuantity()) {//verifico que no soble pase el limite
+                        return false;
+                    }
+                }
+            }
+
+        }
+        return true;//sale si paso todo
+    }
 }
