@@ -11,6 +11,7 @@ import domain.Customer;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import domain.Employee;
+import domain.Sale;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -571,4 +572,36 @@ public class DataAccess {
             return false;
         }
     }
+    
+    public boolean createSale(Sale saleComeFromLogic) {
+       
+        
+        
+        try {
+            String employee= saleComeFromLogic.getEmployee().getName()+" "+saleComeFromLogic.getEmployee().getLastName();
+            String customer=saleComeFromLogic.getCustomer().getName();
+            //Abro conexiones
+            PreparedStatement sentencia = preparedStateent("insert into tbsales values (?,?,?,?,?,?,?)");
+            sentencia.setString(1, "0"); //ID
+            sentencia.setString(2,employee);
+            sentencia.setString(3,customer);
+            sentencia.setString(4,String.valueOf(saleComeFromLogic.getSubTotal()));
+            sentencia.setString(5, String.valueOf(saleComeFromLogic.getDescount()));
+            sentencia.setString(6, String.valueOf(saleComeFromLogic.getCountArticles()));
+            sentencia.setString(7, String.valueOf(saleComeFromLogic.getTotal()));
+
+            sentencia.execute(); //Ejecuta el SQL 
+
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+    
 }
