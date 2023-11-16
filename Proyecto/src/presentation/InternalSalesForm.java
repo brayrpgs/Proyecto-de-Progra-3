@@ -68,8 +68,8 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         lblDiscount = new javax.swing.JLabel();
         txtDiscount = new javax.swing.JTextField();
-        lblDiscount1 = new javax.swing.JLabel();
-        lblDiscount2 = new javax.swing.JLabel();
+        lblSubtotal = new javax.swing.JLabel();
+        lblSubPrice = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -151,6 +151,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         lblDiscount.setText("Descuento");
         getContentPane().add(lblDiscount, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 86, -1, -1));
 
+        txtDiscount.setToolTipText("Digite un descuento del 1% hasta el 99%");
         txtDiscount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDiscountKeyTyped(evt);
@@ -158,11 +159,11 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         });
         getContentPane().add(txtDiscount, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 81, 116, -1));
 
-        lblDiscount1.setText("SubTotal");
-        getContentPane().add(lblDiscount1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, -1, -1));
+        lblSubtotal.setText("SubTotal");
+        getContentPane().add(lblSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, -1, -1));
 
-        lblDiscount2.setText("0");
-        getContentPane().add(lblDiscount2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 86, -1));
+        lblSubPrice.setText("0");
+        getContentPane().add(lblSubPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 86, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -246,15 +247,23 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         } catch(Exception e){}
         
             Object[] aux = {"Id","Marca","Descripcion","Categoria","Cantidad","Precio"}; 
-                       
+            Double subTotal = 0.0;        
+            
             if(new Logic().verifyArticle(articleList, article, Integer.parseInt(txtQuantity.getText()), Integer.parseInt(txtDisponibility.getText()))){
                 
+                showMessage("Articulo agregado exitosamente al carrito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
                 Object[][] temp = new Logic().addArticletoCart(articleList, article);
                 jTable1.setModel(new DefaultTableModel(temp, aux));
                 
-                for(Article data:articleList){
-                    System.out.println(data.toString());
+                for(Article data: articleList){
+                
+                    subTotal += data.getQuantity() * data.getPrice();
+                    
                 }
+                
+                lblSubPrice.setText(String.valueOf(subTotal));
+                
+                cleanForm();
                               
             } else {
                 
@@ -278,11 +287,18 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
         char c = evt.getKeyChar();
-        
+        //char[] char = new char[12];
         if((c < '0' || c > '9') && c != evt.VK_BACK_SPACE) {
          
             evt.consume();
 						
+        } else if(!txtDiscount.getText().isBlank()){
+            
+            if(txtDiscount.getText().length() > 1){
+           
+                evt.consume();
+            }
+            
         }
         
     }//GEN-LAST:event_txtDiscountKeyTyped
@@ -319,6 +335,19 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, message, title, messageType);
     }
     
+    //Metodo para limpiar
+    public void cleanForm(){
+    
+        txtBrand.setText("");
+        txtCategory.setText("");
+        txtDescription.setText("");
+        txtDiscount.setText("");
+        txtDisponibility.setText("");
+        txtPrice.setText("");
+        txtQuantity.setText("");
+        
+        
+    }
     
     private Article article;
     private ArrayList<Article> articleList;
@@ -337,12 +366,12 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblClient;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblDiscount;
-    private javax.swing.JLabel lblDiscount1;
-    private javax.swing.JLabel lblDiscount2;
     private javax.swing.JLabel lblDisponibility;
     public javax.swing.JLabel lblEmployeeName;
     private javax.swing.JLabel lblPrice;
     private javax.swing.JLabel lblQuantity;
+    private javax.swing.JLabel lblSubPrice;
+    private javax.swing.JLabel lblSubtotal;
     private javax.swing.JTextField txtBrand;
     private javax.swing.JTextField txtCategory;
     private javax.swing.JTextField txtDescription;
