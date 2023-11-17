@@ -269,52 +269,7 @@ public class DataAccess {
         }
     }
     
-    public List<Sale> consultarTodosLosRegistrosEnBaseDeDatosSales() {
-        List<Sale> laListaDeRegistrosADevolver = new ArrayList<>();
-        
-        try {
-            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbsales");
-            ResultSet rs = sentencia.executeQuery();
-
-            while (rs.next()) { //¿Existen registros?
-                //Seteo una venta
-                String[] aux = rs.getString("employee").split(" ");
-                Employee employeeAux =  new Employee();
-                employeeAux.setName(aux[0]);
-                employeeAux.setLastName(aux[1]);
-                Customer customer = new Customer();
-                customer.setName(rs.getString("customer"));
-                
-                Sale sale = new Sale();
-                sale.setId(rs.getString("id"));
-                sale.setEmployee(employeeAux);
-                sale.setCustomer(customer);
-                sale.setSubTotal(Double.parseDouble(rs.getString("subTotal")));
-                sale.setDescount(Double.parseDouble(rs.getString("discount")));
-                sale.setCountArticles(Integer.parseInt(rs.getString("CountArticles")));
-                sale.setTotal(Double.parseDouble(rs.getString("total")));
-
-                //Agrego la venta a la lista
-                laListaDeRegistrosADevolver.add(sale);
-            }
-
-            for(Sale data: laListaDeRegistrosADevolver){
-                
-                data.toString();
-                
-            }
-            
-            
-            //Cierro conexiones
-            sentencia.close();
-            connectionSQL().close();
-            return laListaDeRegistrosADevolver;
-        } catch (SQLException e) {
-            System.out.println(e);
-            laListaDeRegistrosADevolver = null;
-            return laListaDeRegistrosADevolver;
-        }
-    }
+   
 
     public List<Customer> modificarEnBaseDeDatosCustomer(Customer customerComeFromLogic) {
 
@@ -620,6 +575,53 @@ public class DataAccess {
         }
     }
     
+     public List<Sale> consultarTodosLosRegistrosEnBaseDeDatosSales() {
+        List<Sale> laListaDeRegistrosADevolver = new ArrayList<>();
+        
+        try {
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbsales");
+            ResultSet rs = sentencia.executeQuery();
+
+            while (rs.next()) { //¿Existen registros?
+                //Seteo una venta
+                String[] aux = rs.getString("employee").split(" ");
+                Employee employeeAux =  new Employee();
+                employeeAux.setName(aux[0]);
+                employeeAux.setLastName(aux[1]);
+                Customer customer = new Customer();
+                customer.setName(rs.getString("customer"));
+                
+                Sale sale = new Sale();
+                sale.setId(rs.getString("id"));
+                sale.setEmployee(employeeAux);
+                sale.setCustomer(customer);
+                sale.setSubTotal(Double.parseDouble(rs.getString("subTotal")));
+                sale.setDescount(Double.parseDouble(rs.getString("discount")));
+                sale.setCountArticles(Integer.parseInt(rs.getString("CountArticles")));
+                sale.setTotal(Double.parseDouble(rs.getString("total")));
+
+                //Agrego la venta a la lista
+                laListaDeRegistrosADevolver.add(sale);
+            }
+
+            for(Sale data: laListaDeRegistrosADevolver){
+                
+                data.toString();
+                
+            }
+            
+            
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+            return laListaDeRegistrosADevolver;
+        } catch (SQLException e) {
+            System.out.println(e);
+            laListaDeRegistrosADevolver = null;
+            return laListaDeRegistrosADevolver;
+        }
+    }
+    
     public boolean createSale(Sale saleComeFromLogic) {
        
         
@@ -650,6 +652,26 @@ public class DataAccess {
             return false;
         }
     }
+     public boolean updateSale(Sale saleComeFromLogic) {
+
+        try {
+            PreparedStatement sentencia = preparedStateent("UPDATE tbsales SET employee=?,customer=? WHERE id = ?");
+
+            sentencia.setString(1, saleComeFromLogic.getEmployee().getName()+" "+saleComeFromLogic.getEmployee().getLastName());
+            sentencia.setString(2, saleComeFromLogic.getCustomer().getName());
+            sentencia.setString(3, saleComeFromLogic.getId());
+
+            sentencia.execute();
+            sentencia.close();
+            connectionSQL().close();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        }
+    }
+    
+    
     
     public boolean deleteSale(Sale sale) {
 
