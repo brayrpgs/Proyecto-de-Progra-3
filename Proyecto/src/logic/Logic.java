@@ -289,4 +289,19 @@ public class Logic {
     public boolean setSale(Sale sale){
         return new DataAccess().createSale(sale);
     }
+    
+    //actualizar los datos en base de datos 
+    public void updateAfterBuy(ArrayList<Article> list) {
+        List<Article> listOrigin = new DataAccess().consultarTodosLosRegistrosEnBaseDeDatosArticle();
+        for (Article data : listOrigin) {
+            for (Article buy : list) {
+                if (data.getId().equals(buy.getId())) {
+                    data.setQuantity(data.getQuantity()-buy.getQuantity());
+                    new dataAccess.DataAccess().updateArticle(data);
+                }
+            }
+        }
+        //return;
+    }
+    
 }

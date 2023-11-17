@@ -319,9 +319,11 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
             sale.setTotal(total);
             
             if(new Logic().setSale(sale)){
-            
-                showMessage("Comprar realizada con exito.", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
-            
+                new logic.Logic().updateAfterBuy(articleList);
+                showMessage("Compra realizada con exito.", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+                //Datos en la tabla
+                jTable2.setModel(new DefaultTableModel(new Logic().allDataArticles(), new Logic().tagNameArticles()));
+                jTable2.removeColumn(jTable1.getColumn("Id"));
             } else {
             
                 showMessage("No se pudo agregar la venta.", "Error al agregar la venta", JOptionPane.ERROR_MESSAGE);
