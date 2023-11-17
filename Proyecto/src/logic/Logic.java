@@ -304,4 +304,8 @@ public class Logic {
         //return;
     }
     
+    //actualizar los datos de ventas 
+    public boolean updateSale(Sale sale){
+        return new dataAccess.DataAccess().updateSale(sale);
+    }
 }
