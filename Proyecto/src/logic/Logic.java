@@ -159,7 +159,7 @@ public class Logic {
             dataResult[i][1] = data.getEmployee().getName() + " " + data.getEmployee().getLastName();
             dataResult[i][2] = data.getCustomer().getName();
             dataResult[i][3] = data.getSubTotal();
-             dataResult[i][4] = data.getDescount();
+            dataResult[i][4] = data.getDescount();
             dataResult[i][5] = data.getCountArticles();
             dataResult[i][6] = data.getTotal();
             i++;
@@ -307,5 +307,41 @@ public class Logic {
     //actualizar los datos de ventas 
     public boolean updateSale(Sale sale){
         return new dataAccess.DataAccess().updateSale(sale);
+    }
+    
+    //retorna la lista de reportes atravez de un empleado
+    public Object[][] allDataSales(Employee e){
+        List<Sale> list = new dataAccess.DataAccess().listaReporte2(e);
+        Object[][] dataResult = new Object[list.size()][7];
+        int i = 0;
+        for (Sale data : list) {
+            dataResult[i][0] = data.getId();
+            dataResult[i][1] = data.getEmployee();
+            dataResult[i][2] = data.getCustomer();
+            dataResult[i][3] = data.getSubTotal();
+            dataResult[i][4] = data.getDescount();
+            dataResult[i][5] = data.getCountArticles();
+            dataResult[i][6] = data.getTotal();
+            i++;
+        }
+        return dataResult;
+    }
+    
+    //retorna la lista de reportes atravez de un cliente
+    public Object[][] allDataSales(Customer e){
+        List<Sale> list = new dataAccess.DataAccess().listaReporte(e);
+        Object[][] dataResult = new Object[list.size()][7];
+        int i = 0;
+        for (Sale data : list) {
+            dataResult[i][0] = data.getId();
+            dataResult[i][1] = data.getEmployee();
+            dataResult[i][2] = data.getCustomer();
+            dataResult[i][3] = data.getSubTotal();
+            dataResult[i][4] = data.getDescount();
+            dataResult[i][5] = data.getCountArticles();
+            dataResult[i][6] = data.getTotal();
+            i++;
+        }
+        return dataResult;
     }
 }
