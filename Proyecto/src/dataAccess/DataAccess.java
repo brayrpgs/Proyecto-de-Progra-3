@@ -179,7 +179,7 @@ public class DataAccess {
                 tempEmp.setId(rs.getString("id")); //ID
                 employeeList.add(tempEmp);
             }
-            
+
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
@@ -240,7 +240,7 @@ public class DataAccess {
 
     public List<Customer> consultarTodosLosRegistrosEnBaseDeDatosCustomer() {
         List<Customer> laListaDeRegistrosADevolver = new ArrayList<>();
-        
+
         try {
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbcustomer");
             ResultSet rs = sentencia.executeQuery();
@@ -268,8 +268,6 @@ public class DataAccess {
             return laListaDeRegistrosADevolver;
         }
     }
-    
-   
 
     public List<Customer> modificarEnBaseDeDatosCustomer(Customer customerComeFromLogic) {
 
@@ -291,7 +289,7 @@ public class DataAccess {
                 tempCus.setId(rs.getString("id")); //ID
                 customerList.add(tempCus);
             }
-            
+
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
@@ -303,7 +301,7 @@ public class DataAccess {
             return null;
         }
     }
-    
+
     public boolean createCustomer(Customer customerComeFromLogic) {
 
         try {
@@ -436,12 +434,12 @@ public class DataAccess {
             return laListaDeRegistrosADevolver;
         }
     }
-    
+
     public List<Article> modificarEnBaseDeDatosArticle(Article articleComeFromLogic) {
 
         List<Article> articleList = new ArrayList<>();
         try {
-       
+
             //Abro conexiones
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbarticles WHERE id <> " + articleComeFromLogic.getId());
             ResultSet rs = sentencia.executeQuery();
@@ -458,7 +456,7 @@ public class DataAccess {
                 tempArt.setId(rs.getString("id")); //ID
                 articleList.add(tempArt);
             }
-            
+
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
@@ -470,7 +468,7 @@ public class DataAccess {
             return null;
         }
     }
-    
+
     public boolean createArticle(Article articleComeFromLogic) {
 
         try {
@@ -574,10 +572,10 @@ public class DataAccess {
             return false;
         }
     }
-    
-     public List<Sale> consultarTodosLosRegistrosEnBaseDeDatosSales() {
+
+    public List<Sale> consultarTodosLosRegistrosEnBaseDeDatosSales() {
         List<Sale> laListaDeRegistrosADevolver = new ArrayList<>();
-        
+
         try {
             PreparedStatement sentencia = preparedStateent("SELECT * FROM tbsales");
             ResultSet rs = sentencia.executeQuery();
@@ -585,12 +583,12 @@ public class DataAccess {
             while (rs.next()) { //¿Existen registros?
                 //Seteo una venta
                 String[] aux = rs.getString("employee").split(" ");
-                Employee employeeAux =  new Employee();
+                Employee employeeAux = new Employee();
                 employeeAux.setName(aux[0]);
                 employeeAux.setLastName(aux[1]);
                 Customer customer = new Customer();
                 customer.setName(rs.getString("customer"));
-                
+
                 Sale sale = new Sale();
                 sale.setId(rs.getString("id"));
                 sale.setEmployee(employeeAux);
@@ -604,13 +602,12 @@ public class DataAccess {
                 laListaDeRegistrosADevolver.add(sale);
             }
 
-            for(Sale data: laListaDeRegistrosADevolver){
-                
+            for (Sale data : laListaDeRegistrosADevolver) {
+
                 data.toString();
-                
+
             }
-            
-            
+
             //Cierro conexiones
             sentencia.close();
             connectionSQL().close();
@@ -621,20 +618,18 @@ public class DataAccess {
             return laListaDeRegistrosADevolver;
         }
     }
-    
+
     public boolean createSale(Sale saleComeFromLogic) {
-       
-        
-        
+
         try {
-            String employee= saleComeFromLogic.getEmployee().getName()+" "+saleComeFromLogic.getEmployee().getLastName();
-            String customer=saleComeFromLogic.getCustomer().getName();
+            String employee = saleComeFromLogic.getEmployee().getName() + " " + saleComeFromLogic.getEmployee().getLastName();
+            String customer = saleComeFromLogic.getCustomer().getName() + " " + saleComeFromLogic.getCustomer().getLastName();
             //Abro conexiones
             PreparedStatement sentencia = preparedStateent("insert into tbsales values (?,?,?,?,?,?,?)");
             sentencia.setString(1, "0"); //ID
-            sentencia.setString(2,employee);
-            sentencia.setString(3,customer);
-            sentencia.setString(4,String.valueOf(saleComeFromLogic.getSubTotal()));
+            sentencia.setString(2, employee);
+            sentencia.setString(3, customer);
+            sentencia.setString(4, String.valueOf(saleComeFromLogic.getSubTotal()));
             sentencia.setString(5, String.valueOf(saleComeFromLogic.getDescount()));
             sentencia.setString(6, String.valueOf(saleComeFromLogic.getCountArticles()));
             sentencia.setString(7, String.valueOf(saleComeFromLogic.getTotal()));
@@ -652,12 +647,13 @@ public class DataAccess {
             return false;
         }
     }
-     public boolean updateSale(Sale saleComeFromLogic) {
+
+    public boolean updateSale(Sale saleComeFromLogic) {
 
         try {
             PreparedStatement sentencia = preparedStateent("UPDATE tbsales SET employee=?,customer=? WHERE id = ?");
 
-            sentencia.setString(1, saleComeFromLogic.getEmployee().getName()+" "+saleComeFromLogic.getEmployee().getLastName());
+            sentencia.setString(1, saleComeFromLogic.getEmployee().getName() + " " + saleComeFromLogic.getEmployee().getLastName());
             sentencia.setString(2, saleComeFromLogic.getCustomer().getName());
             sentencia.setString(3, saleComeFromLogic.getId());
 
@@ -670,9 +666,7 @@ public class DataAccess {
             return false;
         }
     }
-    
-    
-    
+
     public boolean deleteSale(Sale sale) {
 
         try {
@@ -695,5 +689,89 @@ public class DataAccess {
             return false;
         }
     }
+
+    public List<Sale> listaReporte(Customer customer) {
+        List<Sale> laListaDeRegistrosADevolver = new ArrayList<>();
+
+        try {
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbsales WHERE customer=?");
+            sentencia.setString(1, customer.getName() + " " + customer.getLastName());
+            ResultSet rs = sentencia.executeQuery();
+
+            while (rs.next()) { //¿Existen registros?
+                //Seteo una venta
+
+                Sale sale = new Sale();
+                sale.setId(rs.getString("id"));
+                sale.setEmployee(new Employee(null, null, rs.getString("employee"), null, null, null, null));
+                sale.setCustomer(customer);
+                sale.setSubTotal(Double.parseDouble(rs.getString("subTotal")));
+                sale.setDescount(Double.parseDouble(rs.getString("discount")));
+                sale.setCountArticles(Integer.parseInt(rs.getString("CountArticles")));
+                sale.setTotal(Double.parseDouble(rs.getString("total")));
+
+                //Agrego la venta a la lista
+                laListaDeRegistrosADevolver.add(sale);
+            }
+
+            for (Sale data : laListaDeRegistrosADevolver) {
+
+                data.toString();
+
+            }
+
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+
+            return laListaDeRegistrosADevolver;
+        } catch (SQLException e) {
+            System.out.println(e);
+            laListaDeRegistrosADevolver = null;
+            return laListaDeRegistrosADevolver;
+        }
     
+    }
+    public List<Sale> listaReporte2(Employee employee) {
+        List<Sale> laListaDeRegistrosADevolver = new ArrayList<>();
+
+        try {
+            PreparedStatement sentencia = preparedStateent("SELECT * FROM tbsales WHERE employee=?");
+            sentencia.setString(1, employee.getName() + " " + employee.getLastName());
+            ResultSet rs = sentencia.executeQuery();
+
+            while (rs.next()) { //¿Existen registros?
+                //Seteo una venta
+
+                Sale sale = new Sale();
+                sale.setId(rs.getString("id"));
+                sale.setEmployee(employee);
+                sale.setCustomer(new Customer(null, null, rs.getString("customer"), null, null));
+                sale.setSubTotal(Double.parseDouble(rs.getString("subTotal")));
+                sale.setDescount(Double.parseDouble(rs.getString("discount")));
+                sale.setCountArticles(Integer.parseInt(rs.getString("CountArticles")));
+                sale.setTotal(Double.parseDouble(rs.getString("total")));
+
+                //Agrego la venta a la lista
+                laListaDeRegistrosADevolver.add(sale);
+            }
+
+            for (Sale data : laListaDeRegistrosADevolver) {
+
+                data.toString();
+
+            }
+
+            //Cierro conexiones
+            sentencia.close();
+            connectionSQL().close();
+
+            return laListaDeRegistrosADevolver;
+        } catch (SQLException e) {
+            System.out.println(e);
+            laListaDeRegistrosADevolver = null;
+            return laListaDeRegistrosADevolver;
+        }
+    }
+
 }
