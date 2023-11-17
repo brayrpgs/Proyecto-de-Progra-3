@@ -317,7 +317,7 @@ public class Logic {
         for (Sale data : list) {
             dataResult[i][0] = data.getId();
             dataResult[i][1] = data.getEmployee();
-            dataResult[i][2] = data.getCustomer();
+            dataResult[i][2] = data.getCustomer().getName();
             dataResult[i][3] = data.getSubTotal();
             dataResult[i][4] = data.getDescount();
             dataResult[i][5] = data.getCountArticles();
@@ -334,7 +334,7 @@ public class Logic {
         int i = 0;
         for (Sale data : list) {
             dataResult[i][0] = data.getId();
-            dataResult[i][1] = data.getEmployee();
+            dataResult[i][1] = data.getEmployee().getName();
             dataResult[i][2] = data.getCustomer();
             dataResult[i][3] = data.getSubTotal();
             dataResult[i][4] = data.getDescount();

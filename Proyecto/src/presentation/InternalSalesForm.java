@@ -333,18 +333,15 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
             sale.setTotal(total);
             
             if(new Logic().setSale(sale)){
+                
                 new logic.Logic().updateAfterBuy(articleList);
                 showMessage("Compra realizada con exito.", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
                 //Datos en la tabla
                 jTable2.setModel(new DefaultTableModel(new Logic().allDataArticles(), new Logic().tagNameArticles()));
                 jTable1.setModel(new DefaultTableModel(null, new Logic().tagNameArticles()));
-                //articleList = null;
                 
-                for(Article data: articleList){
-                    
-                    data.setQuantity(0);
-                    
-                }
+                
+                articleList.clear();
                 
                 
                 cleanForm();

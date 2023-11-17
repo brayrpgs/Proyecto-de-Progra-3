@@ -179,11 +179,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Reporte por vendedores"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mntmEmployeeReportActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="mntmCustomerReport">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Reporte por clientes"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mntmCustomerReportActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -191,11 +197,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ventas totales"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mntmTotalSalesActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mntmActualInventory">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Inventario actual"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mntmActualInventoryActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

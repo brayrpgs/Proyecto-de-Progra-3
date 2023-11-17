@@ -226,17 +226,37 @@ public class PrincipalGUI extends javax.swing.JFrame {
         mnReport.setText("Reportes");
 
         mntmEmployeeReport.setText("Reporte por vendedores");
+        mntmEmployeeReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmEmployeeReportActionPerformed(evt);
+            }
+        });
         mnReport.add(mntmEmployeeReport);
 
         mntmCustomerReport.setText("Reporte por clientes");
+        mntmCustomerReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmCustomerReportActionPerformed(evt);
+            }
+        });
         mnReport.add(mntmCustomerReport);
 
         jmSalesReport.add(mnReport);
 
         mntmTotalSales.setText("Ventas totales");
+        mntmTotalSales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmTotalSalesActionPerformed(evt);
+            }
+        });
         jmSalesReport.add(mntmTotalSales);
 
         mntmActualInventory.setText("Inventario actual");
+        mntmActualInventory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntmActualInventoryActionPerformed(evt);
+            }
+        });
         jmSalesReport.add(mntmActualInventory);
 
         jMenuBar1.add(jmSalesReport);
@@ -754,6 +774,95 @@ public class PrincipalGUI extends javax.swing.JFrame {
         c.show();
         
     }//GEN-LAST:event_mntmDeleteSaleActionPerformed
+
+    private void mntmEmployeeReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmEmployeeReportActionPerformed
+        // TODO add your handling code here:
+        
+        InternalFrameReport r = new InternalFrameReport("Buscar por empleado");
+        
+        jDesktopPane.add(r);
+        
+        r.show();
+        
+    }//GEN-LAST:event_mntmEmployeeReportActionPerformed
+
+    private void mntmCustomerReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmCustomerReportActionPerformed
+        // TODO add your handling code here:
+        InternalFrameReport r = new InternalFrameReport("Buscar por cliente");
+        
+        jDesktopPane.add(r);
+        
+        r.show();
+    }//GEN-LAST:event_mntmCustomerReportActionPerformed
+
+    private void mntmTotalSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmTotalSalesActionPerformed
+        // TODO add your handling code here:
+        
+        CRUDInternalForm c = new CRUDInternalForm();
+        jDesktopPane.add(c);
+        c.setTitle("Ventas totales");
+        
+        //Apagando labels
+        c.jLabel1.setVisible(false);
+        c.jLabel2.setVisible(false);
+        c.jLabel3.setVisible(false);
+        c.jLabel4.setVisible(false);
+        c.jLabel5.setVisible(false);
+        c.jLabel6.setVisible(false);
+        
+        //Apagando txt
+        c.txt1.setVisible(false);
+        c.txt2.setVisible(false);
+        c.txt3.setVisible(false);
+        c.txt4.setVisible(false);
+        c.txt5.setVisible(false);
+        c.txt6.setVisible(false);
+                
+        //Apagando los botones
+        c.btn2.setVisible(false);       
+        c.btn1.setVisible(false);
+                 
+        //Datos en la tabla
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allDataSales(),new Logic().tagNameSale())); 
+        c.jTable1.removeColumn(c.jTable1.getColumn("Id"));
+        
+        c.show();
+        
+    }//GEN-LAST:event_mntmTotalSalesActionPerformed
+
+    private void mntmActualInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmActualInventoryActionPerformed
+        // TODO add your handling code here:
+        
+        CRUDInternalForm c = new CRUDInternalForm();
+        jDesktopPane.add(c);
+        c.setTitle("Inventario disponible");
+        
+        //Apagando labels
+        c.jLabel1.setVisible(false);
+        c.jLabel2.setVisible(false);
+        c.jLabel3.setVisible(false);
+        c.jLabel4.setVisible(false);
+        c.jLabel5.setVisible(false);
+        c.jLabel6.setVisible(false);
+        
+        //Apagando txt
+        c.txt1.setVisible(false);
+        c.txt2.setVisible(false);
+        c.txt3.setVisible(false);
+        c.txt4.setVisible(false);
+        c.txt5.setVisible(false);
+        c.txt6.setVisible(false);
+                
+        //Apagando los botones
+        c.btn2.setVisible(false);       
+        c.btn1.setVisible(false);
+                 
+        //Datos en la tabla
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allDataArticles(), new Logic().tagNameArticles())); 
+                
+        c.show();
+        
+    }//GEN-LAST:event_mntmActualInventoryActionPerformed
                                                                                                
     public Employee employee;
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -68,7 +68,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return idCard + " - " + name + " " + lastName ;
+        return name + " " + lastName ;
     }
     
 }
