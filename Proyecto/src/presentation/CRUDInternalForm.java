@@ -107,7 +107,15 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -115,6 +123,12 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("DATA");
@@ -422,6 +436,7 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
                 showMessage("Datos incorrectos", "Error al eliminar el articulo", JOptionPane.ERROR_MESSAGE);
                 
             }
+            
         } else if(btn1.getText().equals("Modificar venta")){
         
             if(isEmpty(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText())){
@@ -430,26 +445,32 @@ public class CRUDInternalForm extends javax.swing.JInternalFrame {
                 return;
             } 
             
-            article.setBrand(txt1.getText().toUpperCase());
-            article.setDescription(txt2.getText().toUpperCase());
-            article.setCategory(txt3.getText().toUpperCase());
-            article.setQuantity(Integer.parseInt(txt4.getText()));
-            article.setPrice(Double.parseDouble(txt5.getText()));
-            article.setId(txt6.getText());
+            Employee e = new Employee();
+            e.setName(txt1.getText().split(" ")[0]);
+            e.setLastName(txt1.getText().split(" ")[1]);
             
+            Customer c = new Customer();
+            c.setName(txt2.getText());
+            
+            sale.setEmployee(e);
+            sale.setCustomer(c);
+            sale.setSubTotal(Double.parseDouble(txt3.getText()));
+            sale.setDescount(Double.parseDouble(txt4.getText()));
+            sale.setCountArticles(Integer.parseInt(txt5.getText()));
+            sale.setTotal(Double.parseDouble(txt6.getText()));
                        
-            if(new Logic().updateArticle(article)){ 
+            if(new Logic().updateSale(sale)){ 
                 
-                article = null;
-                showMessage("Articulo actualizado con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+                sale = null;
+                showMessage("Venta actualizada con exito", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
                 
-                refreshTable("Modificar articulo");
+                refreshTable("Modificar venta");
                 
                 cleanData();
                 
             } else {
                 
-                showMessage("Datos incorrectos", "Error al actualizar el articulo", JOptionPane.ERROR_MESSAGE);
+                showMessage("Datos incorrectos", "Error al actualizar la venta", JOptionPane.ERROR_MESSAGE);
                 
             }
         

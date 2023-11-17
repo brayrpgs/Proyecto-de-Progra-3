@@ -56,6 +56,11 @@ public class PrincipalGUI extends javax.swing.JFrame {
         mntmUpdateSale = new javax.swing.JMenuItem();
         mntmDeleteSale = new javax.swing.JMenuItem();
         jmSalesReport = new javax.swing.JMenu();
+        mnReport = new javax.swing.JMenu();
+        mntmEmployeeReport = new javax.swing.JMenuItem();
+        mntmCustomerReport = new javax.swing.JMenuItem();
+        mntmTotalSales = new javax.swing.JMenuItem();
+        mntmActualInventory = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -217,6 +222,23 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jMenuBar1.add(jmSales);
 
         jmSalesReport.setText("Reportes");
+
+        mnReport.setText("Reportes");
+
+        mntmEmployeeReport.setText("Reporte por vendedores");
+        mnReport.add(mntmEmployeeReport);
+
+        mntmCustomerReport.setText("Reporte por clientes");
+        mnReport.add(mntmCustomerReport);
+
+        jmSalesReport.add(mnReport);
+
+        mntmTotalSales.setText("Ventas totales");
+        jmSalesReport.add(mntmTotalSales);
+
+        mntmActualInventory.setText("Inventario actual");
+        jmSalesReport.add(mntmActualInventory);
+
         jMenuBar1.add(jmSalesReport);
 
         setJMenuBar(jMenuBar1);
@@ -671,6 +693,33 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
     private void mntmUpdateSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmUpdateSaleActionPerformed
         // TODO add your handling code here:
+        CRUDInternalForm c = new CRUDInternalForm();
+        jDesktopPane.add(c);
+        c.setTitle("Modificar ventas");
+        
+        //Agregando labels
+        c.jLabel1.setText("Vendedor");
+        c.jLabel2.setText("Cliente");
+        c.jLabel3.setText("SubTotal");
+        c.jLabel4.setText("Descuento");
+        c.jLabel5.setText("Articulos");
+        c.jLabel6.setText("Total");
+                
+        //c.txt1.setEditable(false);
+        //c.txt2.setEditable(false);
+        c.txt3.setEditable(false);
+        c.txt4.setEditable(false);
+        c.txt5.setEditable(false);
+        c.txt6.setEditable(false);      
+        
+        //Agregando los botones      
+        c.btn2.setVisible(false);
+        c.btn1.setText("Modificar venta");
+           
+        //Cargar datos en la tabla
+        c.jTable1.setModel(new DefaultTableModel(new Logic().allDataSales(),new Logic().tagNameSale())); 
+        
+        c.show();
     }//GEN-LAST:event_mntmUpdateSaleActionPerformed
 
     private void mntmDeleteSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntmDeleteSaleActionPerformed
@@ -684,7 +733,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         c.jLabel1.setText("Vendedor");
         c.jLabel2.setText("Cliente");
         c.jLabel3.setText("SubTotal");
-        c.jLabel4.setText("Desuento");
+        c.jLabel4.setText("Descuento");
         c.jLabel5.setText("Articulos");
         c.jLabel6.setText("Total");
                 
@@ -716,18 +765,23 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JMenu jmEmployee;
     private javax.swing.JMenu jmSales;
     private javax.swing.JMenu jmSalesReport;
+    private javax.swing.JMenu mnReport;
+    private javax.swing.JMenuItem mntmActualInventory;
     private javax.swing.JMenuItem mntmAddArticle;
     private javax.swing.JMenuItem mntmAddCustomer;
     private javax.swing.JMenuItem mntmAddEmployee;
     private javax.swing.JMenuItem mntmAddSale;
+    private javax.swing.JMenuItem mntmCustomerReport;
     private javax.swing.JMenuItem mntmDeleteArticle;
     private javax.swing.JMenuItem mntmDeleteCustomer;
     private javax.swing.JMenuItem mntmDeleteEmployee;
     private javax.swing.JMenuItem mntmDeleteSale;
+    private javax.swing.JMenuItem mntmEmployeeReport;
     private javax.swing.JMenuItem mntmReadArticle;
     private javax.swing.JMenuItem mntmReadCustomer;
     private javax.swing.JMenuItem mntmReadEmployee;
     private javax.swing.JMenuItem mntmReadSale;
+    private javax.swing.JMenuItem mntmTotalSales;
     private javax.swing.JMenuItem mntmUpdateArticle;
     private javax.swing.JMenuItem mntmUpdateCustomer;
     private javax.swing.JMenuItem mntmUpdateEmployee;

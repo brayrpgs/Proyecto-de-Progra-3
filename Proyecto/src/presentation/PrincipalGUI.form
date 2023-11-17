@@ -169,6 +169,35 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="mnReport">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reportes"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="mntmEmployeeReport">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Reporte por vendedores"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="mntmCustomerReport">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Reporte por clientes"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <MenuItem class="javax.swing.JMenuItem" name="mntmTotalSales">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ventas totales"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mntmActualInventory">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Inventario actual"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>

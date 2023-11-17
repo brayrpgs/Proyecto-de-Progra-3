@@ -209,13 +209,27 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable2MouseClicked(evt);
             }
         });
         jScrollPane4.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+            jTable2.getColumnModel().getColumn(2).setResizable(false);
+            jTable2.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(449, 166, 440, -1));
 
@@ -323,6 +337,18 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
                 showMessage("Compra realizada con exito.", "Felicidades!", JOptionPane.INFORMATION_MESSAGE);
                 //Datos en la tabla
                 jTable2.setModel(new DefaultTableModel(new Logic().allDataArticles(), new Logic().tagNameArticles()));
+                jTable1.setModel(new DefaultTableModel(null, new Logic().tagNameArticles()));
+                //articleList = null;
+                
+                for(Article data: articleList){
+                    
+                    data.setQuantity(0);
+                    
+                }
+                
+                
+                cleanForm();
+                lblSubPrice.setText("0");
                 jTable2.removeColumn(jTable1.getColumn("Id"));
             } else {
             
@@ -396,7 +422,7 @@ public class InternalSalesForm extends javax.swing.JInternalFrame {
         txtDisponibility.setText("");
         txtPrice.setText("");
         txtQuantity.setText("");
-        
+                
         
     }
 
